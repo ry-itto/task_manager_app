@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="TaskManagerApp" customModuleProvider="target">
             <connections>
+                <outlet property="registerButton" destination="Nql-ad-Yjh" id="am0-Zj-vIK"/>
                 <outlet property="tableView" destination="FjB-vn-DL9" id="70m-Bz-aTc"/>
                 <outlet property="view" destination="iN0-l3-epB" id="sBH-XJ-ibs"/>
             </connections>

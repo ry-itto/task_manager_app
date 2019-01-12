@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="TaskManagerApp" customModuleProvider="target">
             <connections>
                 <outlet property="dueDateTextField" destination="Jjz-iO-ZFR" id="wed-GJ-kPX"/>
+                <outlet property="registerButton" destination="Qs6-5V-4j3" id="PNi-zt-okX"/>
                 <outlet property="taskContent" destination="tyU-pz-wU4" id="qnc-Hq-ktw"/>
                 <outlet property="taskTitle" destination="xqh-gQ-o3y" id="ECL-ea-LBK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
