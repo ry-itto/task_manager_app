@@ -22,6 +22,8 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         
         do {
+            let config = Realm.Configuration(schemaVersion: 1)
+            Realm.Configuration.defaultConfiguration = config
             // Realm初期化，Realmファイルへのパスを標準出力
             print(Realm.Configuration.defaultConfiguration.fileURL!)
             realm = try Realm()
@@ -29,15 +31,20 @@ class RegisterViewController: UIViewController {
             print("Failed : Realm initialize")
         }
         
+        taskTitle?.inputAccessoryView = createToolBar()
+        
+        taskContent?.inputAccessoryView = createToolBar()
+        
         // 期日のテキストフィールドの入力方法のビューについて設定
         dueDateTextField?.inputView = createDatePickerView()
         
         // 出てくる期日入力用ビューのツールバー部分を設定
-        dueDateTextField?.inputAccessoryView = createToolBarForDatePicker()
+        dueDateTextField?.inputAccessoryView = createToolBar()
         
         // 登録，編集ボタンのUI設定
         registerButton?.backgroundColor = UIColor(hex: "00adb5")
         registerButton?.setTitleColor(UIColor(hex: "222831"), for: .normal)
+        view.layoutIfNeeded()
     }
     
     // 登録，編集ボタンがタップされた時の処理
@@ -78,8 +85,8 @@ class RegisterViewController: UIViewController {
         return dp
     }
     
-    // DatePickerのツールバーについて設定するメソッド
-    private func createToolBarForDatePicker() -> UIToolbar {
+    // ツールバーについて設定するメソッド
+    private func createToolBar() -> UIToolbar {
         let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
         let doneButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didDoneButtonTapped))
         toolbar.setItems([doneButtonItem], animated: true)
@@ -87,10 +94,12 @@ class RegisterViewController: UIViewController {
         return toolbar
     }
     
-    // DatePickerのツールバーにあるdoneボタンがタップされた時の処理
-    @objc private func didDoneButtonTapped() {
+    // ツールバーにあるdoneボタンがタップされた時の処理
+    @objc private func didDoneButtonTapped(_ sender: UIBarButtonItem) {
         
-        // キーボード(今回はDatePickerView)を隠す
+        // キーボードを隠す
+        taskTitle?.resignFirstResponder()
+        taskContent?.resignFirstResponder()
         dueDateTextField?.resignFirstResponder()
     }
     

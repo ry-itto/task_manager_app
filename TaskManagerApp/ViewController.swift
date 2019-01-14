@@ -23,6 +23,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         guard let table = tableView else { return }
         
         do {
+            let config = Realm.Configuration(schemaVersion: 1)
+            Realm.Configuration.defaultConfiguration = config
             // Realm初期化
             try realm = Realm()
             guard let t = realm?.objects(Task.self) else { return }
@@ -46,6 +48,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // セルを登録する
         table.register(UITableViewCell.self, forCellReuseIdentifier: CELL_IDENTIFIER)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // 以下ビュー自体のリロード処理
+        loadView()
+        viewDidLoad()
     }
     
     // 「追加」ボタンがタップされた時の処理
@@ -72,7 +82,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //MARK: 他のパラメータも隠して持たせる
         tableCell.textLabel?.text = tasks?[indexPath.row].title
-        tableCell.detailTextLabel?.text = tasks?[indexPath.row].content
+//        tableCell.detailTextLabel?.text = tasks?[indexPath.row].content
         
         return tableCell
     }
@@ -95,7 +105,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        guard let targetTask: Task = tasks?[indexPath.row] else { return }
+        guard let targetTask = tasks?[indexPath.row] else { return }
         
         // 日付を文字列にするためのフォーマット作成
         let df = DateFormatter()
@@ -109,7 +119,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         registerView.taskTitle?.text = targetTask.title
         registerView.taskContent?.text = targetTask.content
         registerView.dueDateTextField?.text = df.string(for: targetTask.dueDate)
+        
         navigationController?.pushViewController(registerView, animated: true)
     }
 }
-
