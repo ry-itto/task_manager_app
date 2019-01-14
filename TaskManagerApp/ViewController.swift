@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         guard let table = tableView else { return }
         
         do {
-            let config = Realm.Configuration(schemaVersion: 1)
+            let config = Realm.Configuration(schemaVersion: 2)
             Realm.Configuration.defaultConfiguration = config
             // Realm初期化
             try realm = Realm()
@@ -85,6 +85,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //MARK: 他のパラメータも隠して持たせる
         tableCell.textLabel?.text = tasks?[indexPath.row].title
 //        tableCell.detailTextLabel?.text = tasks?[indexPath.row].content
+        
+        guard let checked = tasks?[indexPath.row].checked else { return tableCell }
+        
+        if checked {
+            tableCell.imageView?.image = UIImage(named: "checked")
+        } else {
+            tableCell.imageView?.image = UIImage(named: "unchecked")
+        }
         
         return tableCell
     }

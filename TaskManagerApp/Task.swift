@@ -14,6 +14,7 @@ class Task: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var content: String = ""
     @objc dynamic var dueDate: Date = Date()
+    @objc dynamic var checked: Bool = false
     
     override static func primaryKey() -> String? {
         return "id"

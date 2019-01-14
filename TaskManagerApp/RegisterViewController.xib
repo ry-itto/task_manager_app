@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="TaskManagerApp" customModuleProvider="target">
             <connections>
+                <outlet property="checkButton" destination="4Z1-l3-psA" id="0SB-cg-ecV"/>
                 <outlet property="dueDateTextField" destination="Jjz-iO-ZFR" id="wed-GJ-kPX"/>
                 <outlet property="registerButton" destination="Qs6-5V-4j3" id="PNi-zt-okX"/>
                 <outlet property="taskContent" destination="tyU-pz-wU4" id="qnc-Hq-ktw"/>
@@ -70,6 +71,18 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完了" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMh-I2-l1M">
+                    <rect key="frame" x="50" y="471" width="35" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Z1-l3-psA">
+                    <rect key="frame" x="50" y="500" width="30" height="30"/>
+                    <connections>
+                        <action selector="buttonDidTap:" destination="-1" eventType="touchUpInside" id="DJo-49-d4K"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -78,7 +91,9 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tyU-pz-wU4" secondAttribute="trailing" constant="50" id="A1Z-Qu-cL1"/>
                 <constraint firstItem="3mf-9f-0df" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="70" id="Chr-vD-wmi"/>
                 <constraint firstItem="3mf-9f-0df" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="Ees-a1-kD9"/>
+                <constraint firstItem="4Z1-l3-psA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="Hna-cm-X2Z"/>
                 <constraint firstItem="tyU-pz-wU4" firstAttribute="top" secondItem="yF4-Fo-0m9" secondAttribute="bottom" constant="8" id="K08-0O-lGI"/>
+                <constraint firstItem="4Z1-l3-psA" firstAttribute="top" secondItem="RMh-I2-l1M" secondAttribute="bottom" constant="8" id="OWI-9f-gww"/>
                 <constraint firstItem="tyU-pz-wU4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="TlY-sZ-adt"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Qs6-5V-4j3" secondAttribute="bottom" id="YUe-OG-ccP"/>
                 <constraint firstItem="xqh-gQ-o3y" firstAttribute="top" secondItem="3mf-9f-0df" secondAttribute="bottom" constant="8" id="aH8-hd-Ic5"/>
@@ -88,9 +103,11 @@
                 <constraint firstItem="Jjz-iO-ZFR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="hQX-vJ-67g"/>
                 <constraint firstItem="PRZ-oe-of8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="hQg-l1-9HT"/>
                 <constraint firstItem="xqh-gQ-o3y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="pKv-bI-MJr"/>
+                <constraint firstItem="RMh-I2-l1M" firstAttribute="top" secondItem="Jjz-iO-ZFR" secondAttribute="bottom" constant="68" id="qxX-Ry-Wze"/>
                 <constraint firstItem="PRZ-oe-of8" firstAttribute="top" secondItem="tyU-pz-wU4" secondAttribute="bottom" constant="68" id="rt4-BV-BkH"/>
                 <constraint firstItem="yF4-Fo-0m9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="s9Z-M4-aD1"/>
                 <constraint firstItem="yF4-Fo-0m9" firstAttribute="top" secondItem="xqh-gQ-o3y" secondAttribute="bottom" constant="68" id="veL-yz-K8x"/>
+                <constraint firstItem="RMh-I2-l1M" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="zB7-Tq-Wxl"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>

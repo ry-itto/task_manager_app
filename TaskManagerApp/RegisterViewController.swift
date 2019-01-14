@@ -15,6 +15,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet var taskTitle: UITextField?
     @IBOutlet var taskContent: UITextField?
     @IBOutlet var registerButton: UIButton?
+    @IBOutlet var checkButton: UIButton?
     
     var realm: Realm?
 
@@ -22,11 +23,14 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         
         do {
-            let config = Realm.Configuration(schemaVersion: 1)
+            let config = Realm.Configuration(schemaVersion: 2)
             Realm.Configuration.defaultConfiguration = config
             // Realm初期化，Realmファイルへのパスを標準出力
             print(Realm.Configuration.defaultConfiguration.fileURL!)
             realm = try Realm()
+            
+            checkButton?.setImage(UIImage(named: "blank_checkbox"), for: .normal)
+            checkButton?.setImage(UIImage(named: "checked_checkbox"), for: .selected)
         } catch {
             print("Failed : Realm initialize")
         }
@@ -54,6 +58,7 @@ class RegisterViewController: UIViewController {
         task.id = (numberOfTasks ?? 0) + 1
         task.title = taskTitle?.text ?? ""
         task.content = taskContent?.text ?? ""
+        task.checked = checkButton?.isSelected ?? false
         
         do {
             // DBに追加
@@ -66,6 +71,11 @@ class RegisterViewController: UIViewController {
         }
         (presentingViewController as? ViewController)?.tableView?.reloadData()
         navigationController?.popViewController(animated: true)
+    }
+    
+    // ボタンが押された時の処理
+    @IBAction func buttonDidTap(_ sender: UIButton) {
+        checkButton?.isSelected = !sender.isSelected
     }
     
     // 画面下部のボタンのタイトルを設定するメソッド
