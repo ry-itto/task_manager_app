@@ -40,6 +40,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         registerButton?.backgroundColor = UIColor(hex: "00adb5")
         registerButton?.setTitleColor(UIColor(hex: "222831"), for: .normal)
         
+//        navigationItem.leftBarButtonItem = editButtonItem
+        
         // デリゲートを設定
         table.delegate = self
         
@@ -73,7 +75,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // 各セルの高さを設定するメソッド
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 50
     }
     
     // 各セルに対しての設定をするメソッド
@@ -92,6 +94,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if editingStyle == .delete {
             do {
                 try realm?.write {
+                    // テーブルの削除などをする時に以下のメソッドが必要
+                    tableView.beginUpdates()
                     realm?.delete((tasks?[indexPath.row])!)
                     tableView.deleteRows(at: [indexPath], with: .fade)
                 }
@@ -99,6 +103,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print("Failed : delete record")
             }
         }
+        // テーブルを更新した時にnumberOfRowsInSectionから返る値も変える必要があるため，tasksを更新
+        guard let t = realm?.objects(Task.self) else { return }
+        tasks = Array(t)
+        tableView.endUpdates()
     }
     
     // セルがタップされた時に呼ばれるメソッド
