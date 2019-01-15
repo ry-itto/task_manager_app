@@ -40,8 +40,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         registerButton?.backgroundColor = UIColor(hex: "00adb5")
         registerButton?.setTitleColor(UIColor(hex: "222831"), for: .normal)
         
-//        navigationItem.leftBarButtonItem = editButtonItem
-        
         // デリゲートを設定
         table.delegate = self
         
@@ -60,11 +58,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         viewDidLoad()
     }
     
+    
     // 「追加」ボタンがタップされた時の処理
     @IBAction func didAddButtonTupped(_ sender: UIButton) {
         let registerView: RegisterViewController = RegisterViewController()
         registerView.title = "タスク登録"
-        registerView.setButtonTitle(buttonTitle: "登録")
         navigationController?.pushViewController(registerView, animated: true)
     }
 
@@ -131,10 +129,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 登録，編集画面を初期化
         let registerView: RegisterViewController = RegisterViewController()
         registerView.title = "タスク編集"
-        registerView.setButtonTitle(buttonTitle: "更新")
-        registerView.taskTitle?.text = targetTask.title
-        registerView.taskContent?.text = targetTask.content
-        registerView.dueDateTextField?.text = df.string(for: targetTask.dueDate)
+        registerView.reloadView()
+        registerView.registerButton?.setTitle("更新", for: .normal)
+        registerView.task = targetTask
         
         navigationController?.pushViewController(registerView, animated: true)
     }

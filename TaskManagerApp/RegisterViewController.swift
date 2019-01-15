@@ -17,6 +17,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet var registerButton: UIButton?
     @IBOutlet var checkButton: UIButton?
     
+    var task: Task?
     var realm: Realm?
 
     override func viewDidLoad() {
@@ -35,6 +36,10 @@ class RegisterViewController: UIViewController {
             print("Failed : Realm initialize")
         }
         
+        if task != nil {
+            initializeFields()
+        }
+        
         taskTitle?.inputAccessoryView = createToolBar()
         
         taskContent?.inputAccessoryView = createToolBar()
@@ -51,20 +56,33 @@ class RegisterViewController: UIViewController {
         view.layoutIfNeeded()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // 以下ビュー自体のリロード処理
+        loadView()
+        viewDidLoad()
+    }
+    
     // 登録，編集ボタンがタップされた時の処理
     @IBAction func didRegisterButtonTapped(_ sender: UIButton) {
         let numberOfTasks: Int? = realm?.objects(Task.self).count
-        let task = Task()
-        task.id = (numberOfTasks ?? 0) + 1
-        task.title = taskTitle?.text ?? ""
-        task.content = taskContent?.text ?? ""
-        task.checked = checkButton?.isSelected ?? false
+        if task == nil {
+            task = Task()
+            task?.id = (numberOfTasks ?? 0) + 1
+        }
         
         do {
-            // DBに追加
             try realm?.write {
-                realm?.add(task)
+                task?.title = taskTitle?.text ?? ""
+                task?.content = taskContent?.text ?? ""
+                task?.checked = checkButton?.isSelected ?? false
+                if realm?.object(ofType: Task.self, forPrimaryKey: task?.id) == nil {
+                    realm?.add(task!)
+                }
             }
+            // DBに追加
+            
         } catch {
             print("RegisterViewController#didRegisterButtonTapped")
             print("Failed : Realm write process")
@@ -78,11 +96,10 @@ class RegisterViewController: UIViewController {
         checkButton?.isSelected = !sender.isSelected
     }
     
-    // 画面下部のボタンのタイトルを設定するメソッド
-    func setButtonTitle(buttonTitle: String) {
-        registerButton?.setTitle(buttonTitle, for: .normal)
-        
-        print("Set button title to \(buttonTitle)!!")
+    // 画面をリロードするメソッド
+    func reloadView() {
+        loadView()
+        viewDidLoad()
     }
     
     // DatePickerのViewを作成するメソッド
@@ -104,9 +121,21 @@ class RegisterViewController: UIViewController {
         return toolbar
     }
     
+    // 送られてきたTaskの値をテキストフィールドに適用します。
+    private func initializeFields() {
+        
+        let df = DateFormatter()
+        df.dateStyle = .long
+        df.locale = Locale(identifier: "ja")
+        
+        taskTitle?.text = task?.title
+        taskContent?.text = task?.content
+        dueDateTextField?.text = df.string(from: (task?.dueDate)!)
+        checkButton?.isSelected = task?.checked ?? false
+    }
+    
     // ツールバーにあるdoneボタンがタップされた時の処理
     @objc private func didDoneButtonTapped(_ sender: UIBarButtonItem) {
-        
         // キーボードを隠す
         taskTitle?.resignFirstResponder()
         taskContent?.resignFirstResponder()
