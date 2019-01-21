@@ -19,6 +19,7 @@ class RegisterViewController: UIViewController {
     
     var task: Task?
     var realm: Realm?
+    var dueDate: Date = Date()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +77,7 @@ class RegisterViewController: UIViewController {
             try realm?.write {
                 task?.title = taskTitle?.text ?? ""
                 task?.content = taskContent?.text ?? ""
+                task?.dueDate = dueDate
                 task?.checked = checkButton?.isSelected ?? false
                 if realm?.object(ofType: Task.self, forPrimaryKey: task?.id) == nil {
                     realm?.add(task!)
@@ -148,5 +150,7 @@ class RegisterViewController: UIViewController {
         df.dateStyle = .long
         df.locale = Locale(identifier: "ja")
         dueDateTextField?.text = df.string(from: sender.date)
+        
+        dueDate = sender.date
     }
 }

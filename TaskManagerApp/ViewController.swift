@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView?
     @IBOutlet var registerButton: UIButton?
@@ -58,14 +58,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         viewDidLoad()
     }
     
-    
     // 「追加」ボタンがタップされた時の処理
     @IBAction func didAddButtonTupped(_ sender: UIButton) {
         let registerView: RegisterViewController = RegisterViewController()
         registerView.title = "タスク登録"
         navigationController?.pushViewController(registerView, animated: true)
     }
+}
 
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
     // セクションごとに何個のセルを表示するか決めるメソッド
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks?.count ?? 0
@@ -80,9 +81,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableCell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER, for: indexPath)
         
-        //MARK: 他のパラメータも隠して持たせる
         tableCell.textLabel?.text = tasks?[indexPath.row].title
-//        tableCell.detailTextLabel?.text = tasks?[indexPath.row].content
         
         guard let checked = tasks?[indexPath.row].checked else { return tableCell }
         
@@ -129,7 +128,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // 登録，編集画面を初期化
         let registerView: RegisterViewController = RegisterViewController()
         registerView.title = "タスク編集"
-        registerView.reloadView()
         registerView.registerButton?.setTitle("更新", for: .normal)
         registerView.task = targetTask
         
