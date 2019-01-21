@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         guard let table = tableView else { return }
         
         do {
-            let config = Realm.Configuration(schemaVersion: 2)
+            let config = Realm.Configuration(schemaVersion: 3)
             Realm.Configuration.defaultConfiguration = config
             // Realm初期化
             try realm = Realm()

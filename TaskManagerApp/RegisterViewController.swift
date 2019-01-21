@@ -16,6 +16,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet var taskContent: UITextField?
     @IBOutlet var registerButton: UIButton?
     @IBOutlet var checkButton: UIButton?
+    @IBOutlet var taskCategory: UITextField?
     
     var task: Task?
     var realm: Realm?
@@ -25,7 +26,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         
         do {
-            let config = Realm.Configuration(schemaVersion: 2)
+            let config = Realm.Configuration(schemaVersion: 3)
             Realm.Configuration.defaultConfiguration = config
             // Realm初期化，Realmファイルへのパスを標準出力
             print(Realm.Configuration.defaultConfiguration.fileURL!)
@@ -44,6 +45,8 @@ class RegisterViewController: UIViewController {
         taskTitle?.inputAccessoryView = createToolBar()
         
         taskContent?.inputAccessoryView = createToolBar()
+        
+        taskCategory?.inputView = TaskCategoryPicker(selectItems: ["aaa", "bbb"])
         
         // 期日のテキストフィールドの入力方法のビューについて設定
         dueDateTextField?.inputView = createDatePickerView()
@@ -76,6 +79,7 @@ class RegisterViewController: UIViewController {
         do {
             try realm?.write {
                 task?.title = taskTitle?.text ?? ""
+                task?.category = taskCategory?.text ?? ""
                 task?.content = taskContent?.text ?? ""
                 task?.dueDate = dueDate
                 task?.checked = checkButton?.isSelected ?? false
@@ -83,8 +87,6 @@ class RegisterViewController: UIViewController {
                     realm?.add(task!)
                 }
             }
-            // DBに追加
-            
         } catch {
             print("RegisterViewController#didRegisterButtonTapped")
             print("Failed : Realm write process")
@@ -132,6 +134,7 @@ class RegisterViewController: UIViewController {
         
         taskTitle?.text = task?.title
         taskContent?.text = task?.content
+        taskCategory?.text = task?.category
         dueDateTextField?.text = df.string(from: (task?.dueDate)!)
         checkButton?.isSelected = task?.checked ?? false
     }
