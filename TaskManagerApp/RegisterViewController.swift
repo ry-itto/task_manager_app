@@ -21,6 +21,7 @@ class RegisterViewController: UIViewController {
     var task: Task?
     var realm: Realm?
     var dueDate: Date = Date()
+    let taskCategories = ["勉強", "課題", "その他"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +47,9 @@ class RegisterViewController: UIViewController {
         
         taskContent?.inputAccessoryView = createToolBar()
         
-        taskCategory?.inputView = TaskCategoryPicker(selectItems: ["aaa", "bbb"])
+        taskCategory?.inputAccessoryView = createToolBar()
+        
+        taskCategory?.inputView = createTaskCategoryPickerView()
         
         // 期日のテキストフィールドの入力方法のビューについて設定
         dueDateTextField?.inputView = createDatePickerView()
@@ -116,6 +119,14 @@ class RegisterViewController: UIViewController {
         return dp
     }
     
+    // タスクのカテゴリー用PickerViewを作成するメソッド
+    private func createTaskCategoryPickerView() -> UIPickerView {
+        let picker = UIPickerView(frame: CGRect(x: 0, y: 0, width: 320, height: 200))
+        picker.delegate = self
+        picker.dataSource = self
+        return picker
+    }
+    
     // ツールバーについて設定するメソッド
     private func createToolBar() -> UIToolbar {
         let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
@@ -144,6 +155,7 @@ class RegisterViewController: UIViewController {
         // キーボードを隠す
         taskTitle?.resignFirstResponder()
         taskContent?.resignFirstResponder()
+        taskCategory?.resignFirstResponder()
         dueDateTextField?.resignFirstResponder()
     }
     
@@ -155,5 +167,27 @@ class RegisterViewController: UIViewController {
         dueDateTextField?.text = df.string(from: sender.date)
         
         dueDate = sender.date
+    }
+}
+
+extension RegisterViewController: UIPickerViewDelegate {
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return taskCategories[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        taskCategory?.text = taskCategories[row]
+    }
+}
+
+extension RegisterViewController: UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return taskCategories.count
     }
 }
