@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		154044E163E1B392DB95FAAA /* Pods_TaskManagerApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0132FEC54C2ABFA53C41E2A /* Pods_TaskManagerApp.framework */; };
-		BF242A1921F574E900B6E21D /* TaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF242A1821F574E900B6E21D /* TaskCategory.swift */; };
-		BF242A1B21F5792000B6E21D /* TaskCategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF242A1A21F5792000B6E21D /* TaskCategoryPicker.swift */; };
-		BF242A1D21F57A8500B6E21D /* TaskCategoryPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF242A1C21F57A8500B6E21D /* TaskCategoryPicker.xib */; };
 		BF70F35621E88D8700AF6455 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF70F35521E88D8700AF6455 /* Task.swift */; };
 		BF70F35821E92E0600AF6455 /* UIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF70F35721E92E0500AF6455 /* UIColorHex.swift */; };
 		BF822A9E21E85E2400854185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF822A9D21E85E2400854185 /* AppDelegate.swift */; };
@@ -18,14 +15,11 @@
 		BF822AA521E85E2700854185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF822AA421E85E2700854185 /* Assets.xcassets */; };
 		BF822AA821E85E2700854185 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF822AA621E85E2700854185 /* LaunchScreen.storyboard */; };
 		BF822AB221E8633F00854185 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF822AB121E8633F00854185 /* ViewController.xib */; };
-		BF822AB521E86ACF00854185 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF822AB321E86ACF00854185 /* RegisterViewController.swift */; };
-		BF822AB621E86ACF00854185 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF822AB421E86ACF00854185 /* RegisterViewController.xib */; };
+		BF822AB521E86ACF00854185 /* TaskFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF822AB321E86ACF00854185 /* TaskFormController.swift */; };
+		BF822AB621E86ACF00854185 /* TaskFormController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF822AB421E86ACF00854185 /* TaskFormController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BF242A1821F574E900B6E21D /* TaskCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategory.swift; sourceTree = "<group>"; };
-		BF242A1A21F5792000B6E21D /* TaskCategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategoryPicker.swift; sourceTree = "<group>"; usesTabs = 0; };
-		BF242A1C21F57A8500B6E21D /* TaskCategoryPicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCategoryPicker.xib; sourceTree = "<group>"; };
 		BF70F35521E88D8700AF6455 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		BF70F35721E92E0500AF6455 /* UIColorHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorHex.swift; sourceTree = "<group>"; };
 		BF822A9A21E85E2400854185 /* TaskManagerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskManagerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,8 +29,8 @@
 		BF822AA721E85E2700854185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF822AA921E85E2700854185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF822AB121E8633F00854185 /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
-		BF822AB321E86ACF00854185 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		BF822AB421E86ACF00854185 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		BF822AB321E86ACF00854185 /* TaskFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFormController.swift; sourceTree = "<group>"; };
+		BF822AB421E86ACF00854185 /* TaskFormController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskFormController.xib; sourceTree = "<group>"; };
 		C0132FEC54C2ABFA53C41E2A /* Pods_TaskManagerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskManagerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F685130167D1CE40D93B95EC /* Pods-TaskManagerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskManagerApp.release.xcconfig"; path = "Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp.release.xcconfig"; sourceTree = "<group>"; };
 		F84283D78672248548C15E26 /* Pods-TaskManagerApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskManagerApp.debug.xcconfig"; path = "Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -91,12 +85,9 @@
 				BF822AA421E85E2700854185 /* Assets.xcassets */,
 				BF822AA621E85E2700854185 /* LaunchScreen.storyboard */,
 				BF822AA921E85E2700854185 /* Info.plist */,
-				BF822AB321E86ACF00854185 /* RegisterViewController.swift */,
-				BF822AB421E86ACF00854185 /* RegisterViewController.xib */,
+				BF822AB321E86ACF00854185 /* TaskFormController.swift */,
+				BF822AB421E86ACF00854185 /* TaskFormController.xib */,
 				BF70F35521E88D8700AF6455 /* Task.swift */,
-				BF242A1821F574E900B6E21D /* TaskCategory.swift */,
-				BF242A1A21F5792000B6E21D /* TaskCategoryPicker.swift */,
-				BF242A1C21F57A8500B6E21D /* TaskCategoryPicker.xib */,
 			);
 			path = TaskManagerApp;
 			sourceTree = "<group>";
@@ -170,10 +161,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF822AA821E85E2700854185 /* LaunchScreen.storyboard in Resources */,
-				BF242A1D21F57A8500B6E21D /* TaskCategoryPicker.xib in Resources */,
 				BF822AB221E8633F00854185 /* ViewController.xib in Resources */,
 				BF822AA521E85E2700854185 /* Assets.xcassets in Resources */,
-				BF822AB621E86ACF00854185 /* RegisterViewController.xib in Resources */,
+				BF822AB621E86ACF00854185 /* TaskFormController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,12 +223,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF242A1921F574E900B6E21D /* TaskCategory.swift in Sources */,
 				BF70F35621E88D8700AF6455 /* Task.swift in Sources */,
-				BF822AB521E86ACF00854185 /* RegisterViewController.swift in Sources */,
+				BF822AB521E86ACF00854185 /* TaskFormController.swift in Sources */,
 				BF70F35821E92E0600AF6455 /* UIColorHex.swift in Sources */,
 				BF822AA021E85E2400854185 /* ViewController.swift in Sources */,
-				BF242A1B21F5792000B6E21D /* TaskCategoryPicker.swift in Sources */,
 				BF822A9E21E85E2400854185 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
