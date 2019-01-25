@@ -18,11 +18,24 @@ class RegisterViewController: UIViewController {
     @IBOutlet var checkButton: UIButton?
     @IBOutlet var taskCategory: UITextField?
     
-    var task: Task?
+    let task: Task
+    let buttonTitle: String
+    let taskCategories = ["勉強", "課題", "その他"]
+    
     var realm: Realm?
     var dueDate: Date = Date()
-    let taskCategories = ["勉強", "課題", "その他"]
-
+    var taskCompleted: Bool = false
+    
+    init(task: Task, buttonTitle: String) {
+        self.task = task
+        self.buttonTitle = buttonTitle
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,60 +47,32 @@ class RegisterViewController: UIViewController {
             realm = try Realm()
             
             checkButton?.setImage(UIImage(named: "blank_checkbox"), for: .normal)
-            checkButton?.setImage(UIImage(named: "checked_checkbox"), for: .selected)
         } catch {
-            print("Failed : Realm initialize")
+            fatalError("Failed : Realm initialize")
         }
         
-        if task != nil {
-            initializeFields()
-        }
-        
-        taskTitle?.inputAccessoryView = createToolBar()
-        
-        taskContent?.inputAccessoryView = createToolBar()
-        
-        taskCategory?.inputAccessoryView = createToolBar()
-        
-        taskCategory?.inputView = createTaskCategoryPickerView()
-        
-        // 期日のテキストフィールドの入力方法のビューについて設定
-        dueDateTextField?.inputView = createDatePickerView()
-        
-        // 出てくる期日入力用ビューのツールバー部分を設定
-        dueDateTextField?.inputAccessoryView = createToolBar()
+        initializeFields()
         
         // 登録，編集ボタンのUI設定
-        registerButton?.backgroundColor = UIColor(hex: "00adb5")
-        registerButton?.setTitleColor(UIColor(hex: "222831"), for: .normal)
-        view.layoutIfNeeded()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // 以下ビュー自体のリロード処理
-        loadView()
-        viewDidLoad()
+        initializeButton()
     }
     
     // 登録，編集ボタンがタップされた時の処理
-    @IBAction func didRegisterButtonTapped(_ sender: UIButton) {
+    @IBAction func didSubmitButtonTapped(_ sender: UIButton) {
         let numberOfTasks: Int? = realm?.objects(Task.self).count
-        if task == nil {
-            task = Task()
-            task?.id = (numberOfTasks ?? 0) + 1
+        if task.id == 0 {
+            task.id = (numberOfTasks ?? 0) + 1
         }
         
         do {
             try realm?.write {
-                task?.title = taskTitle?.text ?? ""
-                task?.category = taskCategory?.text ?? ""
-                task?.content = taskContent?.text ?? ""
-                task?.dueDate = dueDate
-                task?.checked = checkButton?.isSelected ?? false
-                if realm?.object(ofType: Task.self, forPrimaryKey: task?.id) == nil {
-                    realm?.add(task!)
+                task.title = taskTitle?.text ?? ""
+                task.category = taskCategory?.text ?? ""
+                task.content = taskContent?.text ?? ""
+                task.dueDate = dueDate
+                task.checked = taskCompleted
+                if realm?.object(ofType: Task.self, forPrimaryKey: task.id) == nil {
+                    realm?.add(task)
                 }
             }
         } catch {
@@ -100,7 +85,8 @@ class RegisterViewController: UIViewController {
     
     // ボタンが押された時の処理
     @IBAction func buttonDidTap(_ sender: UIButton) {
-        checkButton?.isSelected = !sender.isSelected
+        checkButton?.isSelected = false
+        changeCheckBoxState()
     }
     
     // 画面をリロードするメソッド
@@ -143,11 +129,50 @@ class RegisterViewController: UIViewController {
         df.dateStyle = .long
         df.locale = Locale(identifier: "ja")
         
-        taskTitle?.text = task?.title
-        taskContent?.text = task?.content
-        taskCategory?.text = task?.category
-        dueDateTextField?.text = df.string(from: (task?.dueDate)!)
-        checkButton?.isSelected = task?.checked ?? false
+        taskTitle?.text = task.title
+        taskContent?.text = task.content
+        taskCategory?.text = task.category
+        dueDateTextField?.text = df.string(from: task.dueDate)
+        
+        // チェックボックスはフラグで管理しているためフラグに入れる
+        taskCompleted = task.checked
+        if taskCompleted {
+            checkButton?.setImage(UIImage(named: "blank_checkbox"), for: .normal)
+        } else {
+            checkButton?.setImage(UIImage(named: "checked_checkbox"), for: .normal)
+        }
+        
+        taskTitle?.inputAccessoryView = createToolBar()
+        
+        taskContent?.inputAccessoryView = createToolBar()
+        
+        taskCategory?.inputAccessoryView = createToolBar()
+        
+        taskCategory?.inputView = createTaskCategoryPickerView()
+        
+        // 期日のテキストフィールドの入力方法のビューについて設定
+        dueDateTextField?.inputView = createDatePickerView()
+        
+        // 出てくる期日入力用ビューのツールバー部分を設定
+        dueDateTextField?.inputAccessoryView = createToolBar()
+    }
+    
+    // Buttonの設定
+    private func initializeButton() {
+        registerButton?.backgroundColor = UIColor(hex: "00adb5")
+        registerButton?.setTitleColor(UIColor(hex: "222831"), for: .normal)
+        registerButton?.setTitle(buttonTitle, for: .normal)
+    }
+    
+    // チェックボックスの状態を変える処理
+    private func changeCheckBoxState() {
+        if taskCompleted {
+            checkButton?.setImage(UIImage(named: "blank_checkbox"), for: .normal)
+            taskCompleted = false
+        } else {
+            checkButton?.setImage(UIImage(named: "checked_checkbox"), for: .normal)
+            taskCompleted = true
+        }
     }
     
     // ツールバーにあるdoneボタンがタップされた時の処理
@@ -169,6 +194,7 @@ class RegisterViewController: UIViewController {
         dueDate = sender.date
     }
 }
+
 
 extension RegisterViewController: UIPickerViewDelegate {
     

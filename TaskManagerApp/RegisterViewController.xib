@@ -33,7 +33,7 @@
                     </constraints>
                     <state key="normal" title="登録"/>
                     <connections>
-                        <action selector="didRegisterButtonTapped:" destination="-1" eventType="touchUpInside" id="taC-vz-y10"/>
+                        <action selector="didSubmitButtonTapped:" destination="-1" eventType="touchUpInside" id="taC-vz-y10"/>
                     </connections>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xqh-gQ-o3y">
@@ -90,14 +90,15 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Z1-l3-psA">
-                    <rect key="frame" x="172" y="555" width="30" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Z1-l3-psA">
+                    <rect key="frame" x="55" y="589" width="30" height="34"/>
                     <connections>
                         <action selector="buttonDidTap:" destination="-1" eventType="touchUpInside" id="DJo-49-d4K"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jjz-iO-ZFR" secondAttribute="trailing" constant="50" id="60B-Yb-JL5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Qs6-5V-4j3" secondAttribute="trailing" id="8BN-65-H7s"/>
@@ -107,10 +108,10 @@
                 <constraint firstItem="3mf-9f-0df" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="70" id="Chr-vD-wmi"/>
                 <constraint firstItem="3mf-9f-0df" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="Ees-a1-kD9"/>
                 <constraint firstItem="tyU-pz-wU4" firstAttribute="top" secondItem="yF4-Fo-0m9" secondAttribute="bottom" constant="8" id="K08-0O-lGI"/>
+                <constraint firstItem="4Z1-l3-psA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="55" id="Kae-rI-h9b"/>
                 <constraint firstItem="Yir-az-xR5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="NSS-wi-YlN"/>
                 <constraint firstItem="tyU-pz-wU4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="TlY-sZ-adt"/>
                 <constraint firstItem="mBP-QH-JGM" firstAttribute="top" secondItem="Jjz-iO-ZFR" secondAttribute="bottom" constant="68" id="Vpl-QE-T8k"/>
-                <constraint firstItem="4Z1-l3-psA" firstAttribute="leading" secondItem="RMh-I2-l1M" secondAttribute="trailing" constant="87" id="WRJ-bk-UtD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Qs6-5V-4j3" secondAttribute="bottom" id="YUe-OG-ccP"/>
                 <constraint firstItem="xqh-gQ-o3y" firstAttribute="top" secondItem="3mf-9f-0df" secondAttribute="bottom" constant="8" id="aH8-hd-Ic5"/>
                 <constraint firstItem="Qs6-5V-4j3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="beG-ju-JdM"/>
@@ -120,8 +121,8 @@
                 <constraint firstItem="Jjz-iO-ZFR" firstAttribute="top" secondItem="PRZ-oe-of8" secondAttribute="bottom" constant="8" id="h7J-9S-Q5R"/>
                 <constraint firstItem="Jjz-iO-ZFR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="hQX-vJ-67g"/>
                 <constraint firstItem="PRZ-oe-of8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="hQg-l1-9HT"/>
+                <constraint firstItem="4Z1-l3-psA" firstAttribute="top" secondItem="RMh-I2-l1M" secondAttribute="bottom" constant="8" id="hwa-Z6-sLg"/>
                 <constraint firstItem="xqh-gQ-o3y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="pKv-bI-MJr"/>
-                <constraint firstItem="4Z1-l3-psA" firstAttribute="top" secondItem="Yir-az-xR5" secondAttribute="bottom" constant="25" id="rZK-Fu-VNn"/>
                 <constraint firstItem="PRZ-oe-of8" firstAttribute="top" secondItem="tyU-pz-wU4" secondAttribute="bottom" constant="68" id="rt4-BV-BkH"/>
                 <constraint firstItem="yF4-Fo-0m9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="s9Z-M4-aD1"/>
                 <constraint firstItem="yF4-Fo-0m9" firstAttribute="top" secondItem="xqh-gQ-o3y" secondAttribute="bottom" constant="68" id="veL-yz-K8x"/>
