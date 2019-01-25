@@ -1,5 +1,5 @@
 //
-//  RegisterViewController.swift
+//  TaskForm.swift
 //  TaskManagerApp
 //
 //  Created by 伊藤凌也 on 2019/01/11.
@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class RegisterViewController: UIViewController {
+class TaskFormController: UIViewController {
     
     @IBOutlet var dueDateTextField: UITextField?
     @IBOutlet var taskTitle: UITextField?
@@ -137,9 +137,9 @@ class RegisterViewController: UIViewController {
         // チェックボックスはフラグで管理しているためフラグに入れる
         taskCompleted = task.checked
         if taskCompleted {
-            checkButton?.setImage(UIImage(named: "blank_checkbox"), for: .normal)
-        } else {
             checkButton?.setImage(UIImage(named: "checked_checkbox"), for: .normal)
+        } else {
+            checkButton?.setImage(UIImage(named: "blank_checkbox"), for: .normal)
         }
         
         taskTitle?.inputAccessoryView = createToolBar()
@@ -196,7 +196,7 @@ class RegisterViewController: UIViewController {
 }
 
 
-extension RegisterViewController: UIPickerViewDelegate {
+extension TaskFormController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return taskCategories[row]
@@ -207,7 +207,7 @@ extension RegisterViewController: UIPickerViewDelegate {
     }
 }
 
-extension RegisterViewController: UIPickerViewDataSource {
+extension TaskFormController: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

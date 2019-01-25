@@ -15,23 +15,28 @@ class ViewController: UIViewController {
     @IBOutlet var registerButton: UIButton?
     
     let CELL_IDENTIFIER = "cell"
-    var realm: Realm?
+    let realm: Realm
     var tasks: Array<Task> = []
+    
+    init() {
+        let config = Realm.Configuration(schemaVersion: 3)
+        Realm.Configuration.defaultConfiguration = config
+        // Realm初期化
+        do {
+            try realm = Realm()
+        } catch {
+            fatalError("Failed : Realm initialize")
+        }
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let table = tableView else { return }
-        
-        do {
-            let config = Realm.Configuration(schemaVersion: 3)
-            Realm.Configuration.defaultConfiguration = config
-            // Realm初期化
-            try realm = Realm()
-            guard let t = realm?.objects(Task.self) else { return }
-            tasks = Array(t)
-        } catch {
-            print("Failed : Realm initialize")
-        }
         
         // ビューのタイトルを設定し，ナビゲーションバーに表示させる
         title = "タスク一覧"
@@ -51,16 +56,14 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // 以下ビュー自体のリロード処理
-        loadView()
-        viewDidLoad()
+        let t = realm.objects(Task.self)
+        tasks = Array(t)
+        tableView?.reloadData()
     }
     
     // 「追加」ボタンがタップされた時の処理
     @IBAction func didAddButtonTupped(_ sender: UIButton) {
-        let registerView: RegisterViewController = RegisterViewController(task: Task(), buttonTitle: "登録")
+        let registerView: TaskFormController = TaskFormController(task: Task(), buttonTitle: "登録")
         registerView.title = "タスク登録"
         navigationController?.pushViewController(registerView, animated: true)
     }
@@ -96,10 +99,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             do {
-                try realm?.write {
+                try realm.write {
                     // テーブルの削除などをする時に以下のメソッドが必要
                     tableView.beginUpdates()
-                    realm?.delete((tasks[indexPath.row]))
+                    realm.delete((tasks[indexPath.row]))
                     tableView.deleteRows(at: [indexPath], with: .fade)
                 }
             } catch {
@@ -107,7 +110,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         // テーブルを更新した時にnumberOfRowsInSectionから返る値も変える必要があるため，tasksを更新
-        guard let t = realm?.objects(Task.self) else { return }
+        let t = realm.objects(Task.self)
         tasks = Array(t)
         tableView.endUpdates()
     }
@@ -122,7 +125,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         df.locale = Locale(identifier: "ja")
         
         // 登録，編集画面を初期化
-        let registerView: RegisterViewController = RegisterViewController(task: tasks[indexPath.row], buttonTitle: "更新")
+        let registerView: TaskFormController = TaskFormController(task: tasks[indexPath.row], buttonTitle: "更新")
         registerView.title = "タスク編集"
         
         navigationController?.pushViewController(registerView, animated: true)
