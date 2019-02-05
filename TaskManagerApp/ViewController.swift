@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     var tasks: Array<Task> = []
     
     init() {
-        let config = Realm.Configuration(schemaVersion: 3)
+        let config = Realm.Configuration(schemaVersion: 4)
         Realm.Configuration.defaultConfiguration = config
         // Realm初期化
         do {

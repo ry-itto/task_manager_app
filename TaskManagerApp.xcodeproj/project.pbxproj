@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		154044E163E1B392DB95FAAA /* Pods_TaskManagerApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0132FEC54C2ABFA53C41E2A /* Pods_TaskManagerApp.framework */; };
+		BF41EEEA21FAF04200CC7AED /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41EEE921FAF04200CC7AED /* Category.swift */; };
 		BF70F35621E88D8700AF6455 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF70F35521E88D8700AF6455 /* Task.swift */; };
 		BF70F35821E92E0600AF6455 /* UIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF70F35721E92E0500AF6455 /* UIColorHex.swift */; };
 		BF822A9E21E85E2400854185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF822A9D21E85E2400854185 /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF41EEE921FAF04200CC7AED /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		BF70F35521E88D8700AF6455 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		BF70F35721E92E0500AF6455 /* UIColorHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorHex.swift; sourceTree = "<group>"; };
 		BF822A9A21E85E2400854185 /* TaskManagerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskManagerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,7 @@
 				BF822AB321E86ACF00854185 /* TaskFormController.swift */,
 				BF822AB421E86ACF00854185 /* TaskFormController.xib */,
 				BF70F35521E88D8700AF6455 /* Task.swift */,
+				BF41EEE921FAF04200CC7AED /* Category.swift */,
 			);
 			path = TaskManagerApp;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				BF70F35821E92E0600AF6455 /* UIColorHex.swift in Sources */,
 				BF822AA021E85E2400854185 /* ViewController.swift in Sources */,
 				BF822A9E21E85E2400854185 /* AppDelegate.swift in Sources */,
+				BF41EEEA21FAF04200CC7AED /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

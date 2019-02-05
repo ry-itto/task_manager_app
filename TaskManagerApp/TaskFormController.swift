@@ -17,18 +17,30 @@ class TaskFormController: UIViewController {
     @IBOutlet var registerButton: UIButton?
     @IBOutlet var checkButton: UIButton?
     @IBOutlet var taskCategory: UITextField?
+    @IBOutlet var taskCategoryAddButton: UIButton?
     
     let task: Task
     let buttonTitle: String
     let taskCategories = ["勉強", "課題", "その他"]
+    let realm: Realm
     
-    var realm: Realm?
     var dueDate: Date = Date()
     var taskCompleted: Bool = false
     
     init(task: Task, buttonTitle: String) {
         self.task = task
         self.buttonTitle = buttonTitle
+        let config = Realm.Configuration(schemaVersion: 4)
+        Realm.Configuration.defaultConfiguration = config
+        // Realm初期化，Realmファイルへのパスを標準出力
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        do {
+            realm = try Realm()
+        } catch {
+            fatalError("Failed : Realm initialize")
+        }
+        
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,18 +51,9 @@ class TaskFormController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        do {
-            let config = Realm.Configuration(schemaVersion: 3)
-            Realm.Configuration.defaultConfiguration = config
-            // Realm初期化，Realmファイルへのパスを標準出力
-            print(Realm.Configuration.defaultConfiguration.fileURL!)
-            realm = try Realm()
-            
-            checkButton?.setImage(UIImage(named: "blank_checkbox"), for: .normal)
-        } catch {
-            fatalError("Failed : Realm initialize")
-        }
+        checkButton?.setImage(UIImage(named: "blank_checkbox"), for: .normal)
         
+        // 各フィールドの初期化
         initializeFields()
         
         // 登録，編集ボタンのUI設定
@@ -59,20 +62,20 @@ class TaskFormController: UIViewController {
     
     // 登録，編集ボタンがタップされた時の処理
     @IBAction func didSubmitButtonTapped(_ sender: UIButton) {
-        let numberOfTasks: Int? = realm?.objects(Task.self).count
+        let numberOfTasks: Int? = realm.objects(Task.self).count
         if task.id == 0 {
             task.id = (numberOfTasks ?? 0) + 1
         }
         
         do {
-            try realm?.write {
+            try realm.write {
                 task.title = taskTitle?.text ?? ""
                 task.category = taskCategory?.text ?? ""
                 task.content = taskContent?.text ?? ""
                 task.dueDate = dueDate
                 task.checked = taskCompleted
-                if realm?.object(ofType: Task.self, forPrimaryKey: task.id) == nil {
-                    realm?.add(task)
+                if realm.object(ofType: Task.self, forPrimaryKey: task.id) == nil {
+                    realm.add(task)
                 }
             }
         } catch {
@@ -83,8 +86,13 @@ class TaskFormController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func categoryAddButtonDidTapped(_ sender: UIButton) {
+        let alertView = createTextInputAlert()
+        self.present(alertView, animated: true, completion: nil)
+    }
+    
     // ボタンが押された時の処理
-    @IBAction func buttonDidTap(_ sender: UIButton) {
+    @IBAction func checkButtonDidTapped(_ sender: UIButton) {
         checkButton?.isSelected = false
         changeCheckBoxState()
     }
@@ -173,6 +181,39 @@ class TaskFormController: UIViewController {
             checkButton?.setImage(UIImage(named: "checked_checkbox"), for: .normal)
             taskCompleted = true
         }
+    }
+    
+    // テキスト入力可能なアラートを作成
+    private func createTextInputAlert() -> UIAlertController {
+        let alertController = UIAlertController()
+        alertController.addTextField(configurationHandler: ({ (textField) in
+            textField.placeholder = "カテゴリー名"
+            textField.keyboardAppearance = .dark
+        }))
+        
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        let registerAction = UIAlertAction(title: "登録", style: .default, handler: { (action) in
+            if let categoryName = alertController.textFields?.first?.text {
+                let category: Category = Category()
+                let nextCategoryId = self.realm.objects(Category.self).count + 1
+                
+                category.id = nextCategoryId
+                category.name = categoryName
+                
+                do {
+                    try self.realm.write {
+                        self.realm.add(category)
+                    }
+                } catch {
+                    return
+                }
+            }
+        })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(registerAction)
+        
+        return alertController
     }
     
     // ツールバーにあるdoneボタンがタップされた時の処理
