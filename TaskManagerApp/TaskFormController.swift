@@ -185,7 +185,7 @@ class TaskFormController: UIViewController {
     
     // テキスト入力可能なアラートを作成
     private func createTextInputAlert() -> UIAlertController {
-        let alertController = UIAlertController()
+        let alertController = UIAlertController(title: "カテゴリー追加", message: "追加したいカテゴリー名を入力してください。", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: ({ (textField) in
             textField.placeholder = "カテゴリー名"
             textField.keyboardAppearance = .dark
