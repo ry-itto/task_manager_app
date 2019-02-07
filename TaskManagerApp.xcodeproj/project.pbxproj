@@ -82,20 +82,44 @@
 		BF822A9C21E85E2400854185 /* TaskManagerApp */ = {
 			isa = PBXGroup;
 			children = (
-				BF70F35721E92E0500AF6455 /* UIColorHex.swift */,
+				BFEA140F220C079900FE6D80 /* util */,
+				BFEA140E220C078300FE6D80 /* db */,
+				BFEA140D220C075500FE6D80 /* views */,
 				BF822A9D21E85E2400854185 /* AppDelegate.swift */,
-				BF822A9F21E85E2400854185 /* ViewController.swift */,
-				BF822AB121E8633F00854185 /* ViewController.xib */,
 				BF822AA421E85E2700854185 /* Assets.xcassets */,
 				BF822AA621E85E2700854185 /* LaunchScreen.storyboard */,
 				BF822AA921E85E2700854185 /* Info.plist */,
-				BF822AB321E86ACF00854185 /* TaskFormController.swift */,
-				BF822AB421E86ACF00854185 /* TaskFormController.xib */,
-				BF70F35521E88D8700AF6455 /* Task.swift */,
-				BF41EEE921FAF04200CC7AED /* Category.swift */,
-				BFBDA78A2209902A00ACDE57 /* TaskNotification.swift */,
 			);
 			path = TaskManagerApp;
+			sourceTree = "<group>";
+		};
+		BFEA140D220C075500FE6D80 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				BF822AB321E86ACF00854185 /* TaskFormController.swift */,
+				BF822AB421E86ACF00854185 /* TaskFormController.xib */,
+				BF822A9F21E85E2400854185 /* ViewController.swift */,
+				BF822AB121E8633F00854185 /* ViewController.xib */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		BFEA140E220C078300FE6D80 /* db */ = {
+			isa = PBXGroup;
+			children = (
+				BF70F35521E88D8700AF6455 /* Task.swift */,
+				BF41EEE921FAF04200CC7AED /* Category.swift */,
+			);
+			path = db;
+			sourceTree = "<group>";
+		};
+		BFEA140F220C079900FE6D80 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				BFBDA78A2209902A00ACDE57 /* TaskNotification.swift */,
+				BF70F35721E92E0500AF6455 /* UIColorHex.swift */,
+			);
+			path = util;
 			sourceTree = "<group>";
 		};
 		DC5501F961C08E0FF33B587D /* Frameworks */ = {
