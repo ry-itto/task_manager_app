@@ -19,6 +19,7 @@
 		BF822AB521E86ACF00854185 /* TaskFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF822AB321E86ACF00854185 /* TaskFormController.swift */; };
 		BF822AB621E86ACF00854185 /* TaskFormController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF822AB421E86ACF00854185 /* TaskFormController.xib */; };
 		BFBDA78B2209902A00ACDE57 /* TaskNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBDA78A2209902A00ACDE57 /* TaskNotification.swift */; };
+		BFEA1455220C34EC00FE6D80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFEA1454220C34EC00FE6D80 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		BF822AB321E86ACF00854185 /* TaskFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFormController.swift; sourceTree = "<group>"; };
 		BF822AB421E86ACF00854185 /* TaskFormController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskFormController.xib; sourceTree = "<group>"; };
 		BFBDA78A2209902A00ACDE57 /* TaskNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNotification.swift; sourceTree = "<group>"; };
+		BFEA1454220C34EC00FE6D80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C0132FEC54C2ABFA53C41E2A /* Pods_TaskManagerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskManagerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F685130167D1CE40D93B95EC /* Pods-TaskManagerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskManagerApp.release.xcconfig"; path = "Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp.release.xcconfig"; sourceTree = "<group>"; };
 		F84283D78672248548C15E26 /* Pods-TaskManagerApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskManagerApp.debug.xcconfig"; path = "Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				BF822AA421E85E2700854185 /* Assets.xcassets */,
 				BF822AA621E85E2700854185 /* LaunchScreen.storyboard */,
 				BF822AA921E85E2700854185 /* Info.plist */,
+				BFEA1454220C34EC00FE6D80 /* GoogleService-Info.plist */,
 			);
 			path = TaskManagerApp;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 				BF822A9721E85E2400854185 /* Frameworks */,
 				BF822A9821E85E2400854185 /* Resources */,
 				10A5F59715FC7F4DA7D7F49F /* [CP] Embed Pods Frameworks */,
+				360F011D4E6057687D00ACC4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -192,6 +196,7 @@
 			files = (
 				BF822AA821E85E2700854185 /* LaunchScreen.storyboard in Resources */,
 				BF822AB221E8633F00854185 /* ViewController.xib in Resources */,
+				BFEA1455220C34EC00FE6D80 /* GoogleService-Info.plist in Resources */,
 				BF822AA521E85E2700854185 /* Assets.xcassets in Resources */,
 				BF822AB621E86ACF00854185 /* TaskFormController.xib in Resources */,
 			);
@@ -209,19 +214,49 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		360F011D4E6057687D00ACC4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AB72B3294C8B3D8712313B2B /* [CP] Check Pods Manifest.lock */ = {
