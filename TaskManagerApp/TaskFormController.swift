@@ -77,6 +77,7 @@ class TaskFormController: UIViewController {
                 if realm.object(ofType: Task.self, forPrimaryKey: task.id) == nil {
                     realm.add(task)
                 }
+                TaskNotification.setNotification(task)
             }
         } catch {
             print("RegisterViewController#didRegisterButtonTapped")
