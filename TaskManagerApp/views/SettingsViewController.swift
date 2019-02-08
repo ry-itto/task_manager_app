@@ -15,10 +15,10 @@ class SettingsViewController: UIViewController {
     let CELL_IDENTIFIER: String = "settingCell"
     let cellTitles: [String] = ["Google認証"]
     
-    static func createWithTabItem() -> SettingsViewController {
-        let viewController: SettingsViewController = SettingsViewController()
-        viewController.tabBarItem = UITabBarItem(title: "設定", image: UIImage(named: "setting"), tag: 1)
-        return viewController
+    static func createWithTabItem() -> UINavigationController {
+        let navigationController: UINavigationController = UINavigationController(rootViewController: SettingsViewController())
+        navigationController.tabBarItem = UITabBarItem(title: "設定", image: UIImage(named: "setting"), tag: 1)
+        return navigationController
     }
 
     override func viewDidLoad() {
@@ -52,5 +52,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     // セルがタップされた時に呼ばれるメソッド
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        navigationController?.pushViewController(GoogleSettingViewController(), animated: true)
     }
 }
