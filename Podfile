@@ -8,6 +8,7 @@ target 'TaskManagerApp' do
   # Pods for TaskManagerApp
   pod 'RealmSwift'
   pod 'Firebase/Auth'
-  pod 'GoogleSignIn'
   pod 'Firebase/Core'
+  pod 'Google/SignIn', '~> 3.0.3'
+  pod 'GoogleAPIClientForREST/Calendar', '~> 1.2.1'
 end

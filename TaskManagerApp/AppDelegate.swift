@@ -31,10 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Notification
         TaskNotification.requestNotificationPermission()
-        
-        // Firebase
-        FirebaseApp.configure()
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+
+        // Google
+        FIRApp.configure()
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
         return true
@@ -72,15 +72,10 @@ extension AppDelegate: GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        // ...
         if let error = error {
             print("\(error)")
             return
         }
-        
-        guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                       accessToken: authentication.accessToken)
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

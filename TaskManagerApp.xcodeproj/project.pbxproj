@@ -24,6 +24,7 @@
 		BFEA1459220D74DD00FE6D80 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFEA1457220D74DD00FE6D80 /* SettingsViewController.xib */; };
 		BFEA145E220DF4CA00FE6D80 /* GoogleSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEA145C220DF4CA00FE6D80 /* GoogleSettingViewController.swift */; };
 		BFEA145F220DF4CA00FE6D80 /* GoogleSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFEA145D220DF4CA00FE6D80 /* GoogleSettingViewController.xib */; };
+		BFEA1461220F45AB00FE6D80 /* GoogleAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEA1460220F45AB00FE6D80 /* GoogleAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		BFEA1457220D74DD00FE6D80 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		BFEA145C220DF4CA00FE6D80 /* GoogleSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSettingViewController.swift; sourceTree = "<group>"; };
 		BFEA145D220DF4CA00FE6D80 /* GoogleSettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleSettingViewController.xib; sourceTree = "<group>"; };
+		BFEA1460220F45AB00FE6D80 /* GoogleAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAPIClient.swift; sourceTree = "<group>"; };
 		C0132FEC54C2ABFA53C41E2A /* Pods_TaskManagerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskManagerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F685130167D1CE40D93B95EC /* Pods-TaskManagerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskManagerApp.release.xcconfig"; path = "Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp.release.xcconfig"; sourceTree = "<group>"; };
 		F84283D78672248548C15E26 /* Pods-TaskManagerApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskManagerApp.debug.xcconfig"; path = "Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			children = (
 				BFBDA78A2209902A00ACDE57 /* TaskNotification.swift */,
 				BF70F35721E92E0500AF6455 /* UIColorHex.swift */,
+				BFEA1460220F45AB00FE6D80 /* GoogleAPIClient.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -229,22 +232,20 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -302,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFEA1461220F45AB00FE6D80 /* GoogleAPIClient.swift in Sources */,
 				BF70F35621E88D8700AF6455 /* Task.swift in Sources */,
 				BFEA145E220DF4CA00FE6D80 /* GoogleSettingViewController.swift in Sources */,
 				BF822AB521E86ACF00854185 /* TaskFormController.swift in Sources */,
