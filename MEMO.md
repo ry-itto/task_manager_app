@@ -27,3 +27,11 @@ Xibで定義されている各種ラベルなどはXibのカスタムクラス�
 `init()`を定義すると，同時に`init(coder aDecoder: NSCoder)`を定義しなくてはいけないが，
 `init(coder aDecoder: NSCoder)`についてはstoryboardを使用した時に呼ばれるイニシャライザ。
 xibを使用している時には`init(coder aDecoder: NSCoder)`は呼ばれないはずなので，万が一呼ばれた際には`fatalError`などで例外をだす。
+
+## Google Calendar APIでの操作について
+### 参考
+- [Firebase - iOS で Google ログインを使用して認証する](https://firebase.google.com/docs/auth/ios/google-signin?hl=ja)
+- [edurd/GoogleCalendarSwift](https://github.com/edurd/GoogleCalendarSwift)
+
+### 参考
+Google sign-in button での認証処理を行うためには，GIDSignInUIDelegateとGIDSignInDelegateを準拠しなくてはいけない。

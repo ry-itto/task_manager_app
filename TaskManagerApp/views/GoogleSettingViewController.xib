@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GoogleSettingViewController" customModule="TaskManagerApp" customModuleProvider="target">
             <connections>
                 <outlet property="calendarToggleSwitch" destination="osh-og-mdt" id="740-hm-1u5"/>
+                <outlet property="output" destination="fic-OU-LgY" id="6ww-wH-Qta"/>
+                <outlet property="signInButton" destination="Ws9-u2-3al" id="f4g-yo-Qbn"/>
                 <outlet property="view" destination="3ao-Pe-yLi" id="4Gy-rM-AxM"/>
             </connections>
         </placeholder>
@@ -45,9 +47,20 @@
                         <action selector="signOutButtonDidTapped:" destination="-1" eventType="touchUpInside" id="aUb-X9-TYV"/>
                     </connections>
                 </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fic-OU-LgY">
+                    <rect key="frame" x="67" y="346" width="241" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="ig0-Yu-8Q6"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="fic-OU-LgY" firstAttribute="leading" secondItem="Ypd-hF-SdT" secondAttribute="leading" constant="67" id="09Y-BT-PGN"/>
+                <constraint firstItem="fic-OU-LgY" firstAttribute="top" secondItem="8X2-EE-jHb" secondAttribute="bottom" constant="17" id="6LU-HN-Wov"/>
                 <constraint firstItem="emJ-nd-0Rs" firstAttribute="leading" secondItem="Ypd-hF-SdT" secondAttribute="leading" constant="67" id="8s6-OJ-Ag9"/>
                 <constraint firstItem="osh-og-mdt" firstAttribute="leading" secondItem="emJ-nd-0Rs" secondAttribute="trailing" constant="69" id="DxT-9I-s1S"/>
                 <constraint firstItem="Ypd-hF-SdT" firstAttribute="trailing" secondItem="8X2-EE-jHb" secondAttribute="trailing" constant="97" id="EOY-BH-OaA"/>
@@ -56,6 +69,7 @@
                 <constraint firstItem="8X2-EE-jHb" firstAttribute="leading" secondItem="Ypd-hF-SdT" secondAttribute="leading" constant="97" id="RhV-D5-xPC"/>
                 <constraint firstItem="osh-og-mdt" firstAttribute="top" secondItem="Ws9-u2-3al" secondAttribute="bottom" constant="52" id="Ylw-yn-nwk"/>
                 <constraint firstItem="Ws9-u2-3al" firstAttribute="top" secondItem="Ypd-hF-SdT" secondAttribute="top" constant="70" id="gxj-OS-MyC"/>
+                <constraint firstItem="Ypd-hF-SdT" firstAttribute="trailing" secondItem="fic-OU-LgY" secondAttribute="trailing" constant="67" id="hYO-OQ-IME"/>
                 <constraint firstItem="Ypd-hF-SdT" firstAttribute="trailing" secondItem="Ws9-u2-3al" secondAttribute="trailing" constant="67" id="jID-ZY-jxi"/>
                 <constraint firstItem="emJ-nd-0Rs" firstAttribute="top" secondItem="Ws9-u2-3al" secondAttribute="bottom" constant="57" id="lt9-p1-nOZ"/>
             </constraints>
