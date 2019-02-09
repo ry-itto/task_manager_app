@@ -14,21 +14,31 @@ import GoogleAPIClientForREST
 class GoogleSettingViewController: UIViewController {
     
     @IBOutlet var signInButton: GIDSignInButton?
-    @IBOutlet var calendarToggleSwitch: UISwitch?
+    @IBOutlet var calendarSwitch: UISwitch?
     
     let service = GoogleAPIClient.sharedInstance.calendarService
+    
+    // Calendarの読み書き込み許可をリクエストするスコープ
     private let scopes = [kGTLRAuthScopeCalendar]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance()?.uiDelegate = self
         GIDSignIn.sharedInstance()?.delegate = self
+        
+        // Google認証の際にアクセスを許可してもらうスコープを設定
         GIDSignIn.sharedInstance()?.scopes = scopes
     }
     
+    // ログインしたGoogleアカウントをサインアウトする
     @IBAction func signOutButtonDidTapped(_ sender: UIButton) {
         GIDSignIn.sharedInstance()?.signOut()
         self.signInButton?.isHidden = false
+    }
+    
+    // カレンダーに登録するかのスイッチが押された時のイベント
+    @IBAction func calendarSwitchDidToggled(_ sender: UISwitch) {
+        GoogleAPIClient.sharedInstance.isRegisterToCalendar = sender.isOn
     }
 }
 

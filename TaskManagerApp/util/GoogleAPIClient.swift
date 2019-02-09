@@ -16,7 +16,9 @@ class GoogleAPIClient {
     private init() {}
     
     let calendarService = GTLRCalendarService()
+    var isRegisterToCalendar: Bool = true
     
+    // 新規イベントをGoogle Calendarに作成する
     func addEventToGoogleCalendar(summary : String, description :String, targetDate : Date) {
         let calendarEvent = GTLRCalendar_Event()
         calendarEvent.summary = summary
@@ -35,6 +37,7 @@ class GoogleAPIClient {
         }
     }
     
+    // 日付型を専用の型に変換
     private func dateToEventDateTime(date: Date) -> GTLRCalendar_EventDateTime {
         let dateTime = GTLRDateTime(date: date)
         let eventDateTime = GTLRCalendar_EventDateTime()

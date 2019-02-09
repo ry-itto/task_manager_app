@@ -29,7 +29,7 @@ class TaskNotification {
         })
     }
     
-    // ローカル通知をセットするメソッド
+    // ローカル通知をセットするメソッド(タスク期日になったら通知)
     static func setNotification(_ task: Task) {
         
         let dateComponents: DateComponents = Calendar.current.dateComponents(in: TimeZone.current, from: task.dueDate)

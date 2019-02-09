@@ -77,8 +77,13 @@ class TaskFormController: UIViewController {
                 if realm.object(ofType: Task.self, forPrimaryKey: task.id) == nil {
                     realm.add(task)
                 }
+                // ローカル通知を登録
                 TaskNotification.setNotification(task)
-                GoogleAPIClient.sharedInstance.addEventToGoogleCalendar(summary: task.title, description: task.content, targetDate: task.dueDate)
+                
+                if GoogleAPIClient.sharedInstance.isRegisterToCalendar {
+                    // Google Calendarにタスクに基づくイベント登録
+                    GoogleAPIClient.sharedInstance.addEventToGoogleCalendar(summary: task.title, description: task.content, targetDate: task.dueDate)
+                }
             }
         } catch {
             print("RegisterViewController#didRegisterButtonTapped")
@@ -153,11 +158,8 @@ class TaskFormController: UIViewController {
         }
         
         taskTitle?.inputAccessoryView = createToolBar()
-        
         taskContent?.inputAccessoryView = createToolBar()
-        
         taskCategory?.inputAccessoryView = createToolBar()
-        
         taskCategory?.inputView = createTaskCategoryPickerView()
         
         // 期日のテキストフィールドの入力方法のビューについて設定

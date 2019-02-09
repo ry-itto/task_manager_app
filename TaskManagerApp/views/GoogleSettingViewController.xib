@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GoogleSettingViewController" customModule="TaskManagerApp" customModuleProvider="target">
             <connections>
-                <outlet property="calendarToggleSwitch" destination="osh-og-mdt" id="740-hm-1u5"/>
+                <outlet property="calendarSwitch" destination="osh-og-mdt" id="NfR-1f-5Mw"/>
                 <outlet property="signInButton" destination="Ws9-u2-3al" id="f4g-yo-Qbn"/>
                 <outlet property="view" destination="3ao-Pe-yLi" id="4Gy-rM-AxM"/>
             </connections>
@@ -37,6 +37,9 @@
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="osh-og-mdt">
                     <rect key="frame" x="258" y="242" width="51" height="31"/>
+                    <connections>
+                        <action selector="calendarSwitchDidToggled:" destination="-1" eventType="touchUpInside" id="z34-B7-GEf"/>
+                    </connections>
                 </switch>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8X2-EE-jHb">
                     <rect key="frame" x="97" y="299" width="181" height="30"/>
