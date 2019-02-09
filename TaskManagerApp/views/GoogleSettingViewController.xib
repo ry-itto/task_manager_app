@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GoogleSettingViewController" customModule="TaskManagerApp" customModuleProvider="target">
+            <connections>
+                <outlet property="calendarToggleSwitch" destination="osh-og-mdt" id="740-hm-1u5"/>
+                <outlet property="signInButton" destination="Ws9-u2-3al" id="f4g-yo-Qbn"/>
+                <outlet property="view" destination="3ao-Pe-yLi" id="4Gy-rM-AxM"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="3ao-Pe-yLi">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ws9-u2-3al" customClass="GIDSignInButton">
+                    <rect key="frame" x="67" y="90" width="241" height="100"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="MZe-ne-awD"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カレンダー登録" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emJ-nd-0Rs">
+                    <rect key="frame" x="67" y="247" width="122" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="osh-og-mdt">
+                    <rect key="frame" x="258" y="242" width="51" height="31"/>
+                </switch>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8X2-EE-jHb">
+                    <rect key="frame" x="97" y="299" width="181" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="サインアウト"/>
+                    <connections>
+                        <action selector="signOutButtonDidTapped:" destination="-1" eventType="touchUpInside" id="aUb-X9-TYV"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="emJ-nd-0Rs" firstAttribute="leading" secondItem="Ypd-hF-SdT" secondAttribute="leading" constant="67" id="8s6-OJ-Ag9"/>
+                <constraint firstItem="osh-og-mdt" firstAttribute="leading" secondItem="emJ-nd-0Rs" secondAttribute="trailing" constant="69" id="DxT-9I-s1S"/>
+                <constraint firstItem="Ypd-hF-SdT" firstAttribute="trailing" secondItem="8X2-EE-jHb" secondAttribute="trailing" constant="97" id="EOY-BH-OaA"/>
+                <constraint firstItem="Ws9-u2-3al" firstAttribute="leading" secondItem="Ypd-hF-SdT" secondAttribute="leading" constant="67" id="Hh2-id-W5v"/>
+                <constraint firstItem="8X2-EE-jHb" firstAttribute="top" secondItem="osh-og-mdt" secondAttribute="bottom" constant="26" id="OPt-bv-gss"/>
+                <constraint firstItem="8X2-EE-jHb" firstAttribute="leading" secondItem="Ypd-hF-SdT" secondAttribute="leading" constant="97" id="RhV-D5-xPC"/>
+                <constraint firstItem="osh-og-mdt" firstAttribute="top" secondItem="Ws9-u2-3al" secondAttribute="bottom" constant="52" id="Ylw-yn-nwk"/>
+                <constraint firstItem="Ws9-u2-3al" firstAttribute="top" secondItem="Ypd-hF-SdT" secondAttribute="top" constant="70" id="gxj-OS-MyC"/>
+                <constraint firstItem="Ypd-hF-SdT" firstAttribute="trailing" secondItem="Ws9-u2-3al" secondAttribute="trailing" constant="67" id="jID-ZY-jxi"/>
+                <constraint firstItem="emJ-nd-0Rs" firstAttribute="top" secondItem="Ws9-u2-3al" secondAttribute="bottom" constant="57" id="lt9-p1-nOZ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Ypd-hF-SdT"/>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
+        </view>
+    </objects>
+</document>

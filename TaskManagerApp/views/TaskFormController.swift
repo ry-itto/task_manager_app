@@ -78,6 +78,7 @@ class TaskFormController: UIViewController {
                     realm.add(task)
                 }
                 TaskNotification.setNotification(task)
+                GoogleAPIClient.sharedInstance.addEventToGoogleCalendar(summary: task.title, description: task.content, targetDate: task.dueDate)
             }
         } catch {
             print("RegisterViewController#didRegisterButtonTapped")

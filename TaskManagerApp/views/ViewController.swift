@@ -34,6 +34,12 @@ class ViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    static func createWithTabBarItem() -> UINavigationController {
+        let navigationController = UINavigationController(rootViewController: ViewController())
+        navigationController.tabBarItem = UITabBarItem(title: "タスク管理", image: UIImage(named: "todoList"), tag: 0)
+        return navigationController
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let table = tableView else { return }
