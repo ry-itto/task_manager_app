@@ -56,6 +56,7 @@ class ViewController: UIViewController {
         
         // データソースを設定
         table.dataSource = self
+        table.tableFooterView = UIView()
         
         // セルを登録する
         table.register(UITableViewCell.self, forCellReuseIdentifier: CELL_IDENTIFIER)

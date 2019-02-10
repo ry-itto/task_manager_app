@@ -27,6 +27,7 @@ class SettingsViewController: UIViewController {
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.register(UITableViewCell.self, forCellReuseIdentifier: CELL_IDENTIFIER)
+        tableView?.tableFooterView = UIView()
     }
 }
 
@@ -38,7 +39,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     // 各セルの高さを設定するメソッド
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 70
     }
     
     // 各セルに対しての設定をするメソッド
@@ -46,6 +47,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let tableCell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER, for: indexPath)
         
         tableCell.textLabel?.text = cellTitles[indexPath.row]
+        tableCell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
         return tableCell
     }
