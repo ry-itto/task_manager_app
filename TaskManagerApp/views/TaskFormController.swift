@@ -62,6 +62,7 @@ class TaskFormController: UIViewController {
     
     // 登録，編集ボタンがタップされた時の処理
     @IBAction func didSubmitButtonTapped(_ sender: UIButton) {
+        sender.backgroundColor = UIColor(hex: "00adb5")
         let numberOfTasks: Int? = realm.objects(Task.self).count
         if task.id == 0 {
             task.id = (numberOfTasks ?? 0) + 1
@@ -93,6 +94,16 @@ class TaskFormController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    // ボタンを押している間のイベント
+    @IBAction func submitButtonIsTapping(_ sender: UIButton) {
+        sender.backgroundColor = UIColor(hex: "009da4")
+    }
+    
+    // ボタンがタップされ，ボタンの外側で放された(キャンセルされた)時のイベント
+    @IBAction func didSubmitButtonTappedOutside(_ sender: UIButton) {
+        sender.backgroundColor = UIColor(hex: "00adb5")
+    }
+    
     @IBAction func categoryAddButtonDidTapped(_ sender: UIButton) {
         let alertView = createTextInputAlert()
         self.present(alertView, animated: true, completion: nil)
@@ -102,16 +113,6 @@ class TaskFormController: UIViewController {
     @IBAction func checkButtonDidTapped(_ sender: UIButton) {
         checkButton?.isSelected = false
         changeCheckBoxState()
-    }
-    
-    // ボタンを押している間のイベント
-    @IBAction func checkButtonIsTapping(_ sender: UIButton) {
-        sender.backgroundColor = UIColor(hex: "009da4")
-    }
-    
-    // ボタンがタップされ，ボタンの外側で放された(キャンセルされた)時のイベント
-    @IBAction func didCheckButtonTappedOutside(_ sender: UIButton) {
-        sender.backgroundColor = UIColor(hex: "00adb5")
     }
     
     // 画面をリロードするメソッド
