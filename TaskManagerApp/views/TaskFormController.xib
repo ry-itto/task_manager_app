@@ -34,6 +34,8 @@
                     </constraints>
                     <state key="normal" title="登録"/>
                     <connections>
+                        <action selector="checkButtonIsTapping:" destination="-1" eventType="touchDown" id="tH9-n0-cD5"/>
+                        <action selector="didCheckButtonTappedOutside:" destination="-1" eventType="touchUpOutside" id="PLz-1x-cfd"/>
                         <action selector="didSubmitButtonTapped:" destination="-1" eventType="touchUpInside" id="taC-vz-y10"/>
                     </connections>
                 </button>

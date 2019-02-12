@@ -104,6 +104,16 @@ class TaskFormController: UIViewController {
         changeCheckBoxState()
     }
     
+    // ボタンを押している間のイベント
+    @IBAction func checkButtonIsTapping(_ sender: UIButton) {
+        sender.backgroundColor = UIColor(hex: "009da4")
+    }
+    
+    // ボタンがタップされ，ボタンの外側で放された(キャンセルされた)時のイベント
+    @IBAction func didCheckButtonTappedOutside(_ sender: UIButton) {
+        sender.backgroundColor = UIColor(hex: "00adb5")
+    }
+    
     // 画面をリロードするメソッド
     func reloadView() {
         loadView()
