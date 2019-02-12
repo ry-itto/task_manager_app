@@ -49,7 +49,11 @@ class ViewController: UIViewController {
         
         // 追加ボタンのUI設定
         registerButton?.backgroundColor = UIColor(hex: "00adb5")
-        registerButton?.setTitleColor(UIColor(hex: "222831"), for: .normal)
+        registerButton?.setTitleColor(.white, for: .normal)
+        registerButton?.layer.shadowOffset = CGSize(width: 2, height: 2)
+        registerButton?.layer.shadowColor = UIColor.gray.cgColor
+        registerButton?.layer.shadowRadius = 5
+        registerButton?.layer.shadowOpacity = 1.0
         
         // デリゲートを設定
         table.delegate = self
@@ -69,10 +73,21 @@ class ViewController: UIViewController {
     }
     
     // 「追加」ボタンがタップされた時の処理
-    @IBAction func didAddButtonTupped(_ sender: UIButton) {
+    @IBAction func didAddButtonTapped(_ sender: UIButton) {
+        sender.backgroundColor = UIColor(hex: "00adb5")
         let registerView: TaskFormController = TaskFormController(task: Task(), buttonTitle: "登録")
         registerView.title = "タスク登録"
         navigationController?.pushViewController(registerView, animated: true)
+    }
+    
+    // ボタンを押している間のイベント
+    @IBAction func addButtonIsTapping(_ sender: UIButton) {
+        sender.backgroundColor = UIColor(hex: "009da4")
+    }
+    
+    // ボタンがタップされ，ボタンの外側で放された(キャンセルされた)時のイベント
+    @IBAction func didAddButtonTappedOutside(_ sender: UIButton) {
+        sender.backgroundColor = UIColor(hex: "00adb5")
     }
 }
 
