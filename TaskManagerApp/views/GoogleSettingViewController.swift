@@ -27,6 +27,7 @@ class GoogleSettingViewController: UIViewController {
         
         GIDSignIn.sharedInstance()?.uiDelegate = self
         GIDSignIn.sharedInstance()?.delegate = self
+        GIDSignIn.sharedInstance()?.signInSilently()
         
         // Google認証の際にアクセスを許可してもらうスコープを設定
         GIDSignIn.sharedInstance()?.scopes = scopes

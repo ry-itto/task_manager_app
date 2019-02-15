@@ -35,3 +35,8 @@ xibを使用している時には`init(coder aDecoder: NSCoder)`は呼ばれな�
 
 ### 参考
 Google sign-in button での認証処理を行うためには，GIDSignInUIDelegateとGIDSignInDelegateを準拠しなくてはいけない。
+
+## iOSアプリでの通常の作りかた
+- 新規作成とかではモーダルで立ち上げて左上にキャンセル，右上に登録ボタンをつけてあげる。(編集も)
+- 完了ボタンを編集画面につけておくのではなく，タスク一覧画面の左端につけてあげるようにする。リマインダーとか参考
+- 
