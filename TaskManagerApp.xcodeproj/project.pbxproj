@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		154044E163E1B392DB95FAAA /* Pods_TaskManagerApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0132FEC54C2ABFA53C41E2A /* Pods_TaskManagerApp.framework */; };
+		BF18BD4D2217C12400192EB9 /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF18BD4C2217C12400192EB9 /* TaskRepository.swift */; };
+		BF18BD4F22184CA300192EB9 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF18BD4E22184CA300192EB9 /* Realm.swift */; };
+		BF18BD5122184F4300192EB9 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF18BD5022184F4300192EB9 /* CategoryRepository.swift */; };
 		BF41EEEA21FAF04200CC7AED /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF41EEE921FAF04200CC7AED /* Category.swift */; };
 		BF70F35621E88D8700AF6455 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF70F35521E88D8700AF6455 /* Task.swift */; };
 		BF70F35821E92E0600AF6455 /* UIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF70F35721E92E0500AF6455 /* UIColorHex.swift */; };
@@ -28,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF18BD4C2217C12400192EB9 /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
+		BF18BD4E22184CA300192EB9 /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		BF18BD5022184F4300192EB9 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
 		BF41EEE921FAF04200CC7AED /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		BF70F35521E88D8700AF6455 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		BF70F35721E92E0500AF6455 /* UIColorHex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorHex.swift; sourceTree = "<group>"; };
@@ -73,6 +79,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BF18BD492217BE7F00192EB9 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BF18BD4C2217C12400192EB9 /* TaskRepository.swift */,
+				BF18BD5022184F4300192EB9 /* CategoryRepository.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		BF822A9121E85E2400854185 = {
 			isa = PBXGroup;
 			children = (
@@ -94,14 +109,15 @@
 		BF822A9C21E85E2400854185 /* TaskManagerApp */ = {
 			isa = PBXGroup;
 			children = (
-				BFEA140F220C079900FE6D80 /* util */,
-				BFEA140E220C078300FE6D80 /* db */,
-				BFEA140D220C075500FE6D80 /* views */,
+				BFEA1454220C34EC00FE6D80 /* GoogleService-Info.plist */,
+				BF822AA921E85E2700854185 /* Info.plist */,
 				BF822A9D21E85E2400854185 /* AppDelegate.swift */,
 				BF822AA421E85E2700854185 /* Assets.xcassets */,
+				BFEA140E220C078300FE6D80 /* db */,
 				BF822AA621E85E2700854185 /* LaunchScreen.storyboard */,
-				BF822AA921E85E2700854185 /* Info.plist */,
-				BFEA1454220C34EC00FE6D80 /* GoogleService-Info.plist */,
+				BF18BD492217BE7F00192EB9 /* model */,
+				BFEA140F220C079900FE6D80 /* util */,
+				BFEA140D220C075500FE6D80 /* views */,
 			);
 			path = TaskManagerApp;
 			sourceTree = "<group>";
@@ -109,14 +125,14 @@
 		BFEA140D220C075500FE6D80 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				BFEA145C220DF4CA00FE6D80 /* GoogleSettingViewController.swift */,
+				BFEA145D220DF4CA00FE6D80 /* GoogleSettingViewController.xib */,
+				BFEA1456220D74DD00FE6D80 /* SettingsViewController.swift */,
+				BFEA1457220D74DD00FE6D80 /* SettingsViewController.xib */,
 				BF822AB321E86ACF00854185 /* TaskFormController.swift */,
 				BF822AB421E86ACF00854185 /* TaskFormController.xib */,
 				BF822A9F21E85E2400854185 /* ViewController.swift */,
 				BF822AB121E8633F00854185 /* ViewController.xib */,
-				BFEA1456220D74DD00FE6D80 /* SettingsViewController.swift */,
-				BFEA1457220D74DD00FE6D80 /* SettingsViewController.xib */,
-				BFEA145C220DF4CA00FE6D80 /* GoogleSettingViewController.swift */,
-				BFEA145D220DF4CA00FE6D80 /* GoogleSettingViewController.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -124,8 +140,8 @@
 		BFEA140E220C078300FE6D80 /* db */ = {
 			isa = PBXGroup;
 			children = (
-				BF70F35521E88D8700AF6455 /* Task.swift */,
 				BF41EEE921FAF04200CC7AED /* Category.swift */,
+				BF70F35521E88D8700AF6455 /* Task.swift */,
 			);
 			path = db;
 			sourceTree = "<group>";
@@ -133,9 +149,10 @@
 		BFEA140F220C079900FE6D80 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				BFEA1460220F45AB00FE6D80 /* GoogleAPIClient.swift */,
 				BFBDA78A2209902A00ACDE57 /* TaskNotification.swift */,
 				BF70F35721E92E0500AF6455 /* UIColorHex.swift */,
-				BFEA1460220F45AB00FE6D80 /* GoogleAPIClient.swift */,
+				BF18BD4E22184CA300192EB9 /* Realm.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -307,12 +324,15 @@
 				BF70F35621E88D8700AF6455 /* Task.swift in Sources */,
 				BFEA145E220DF4CA00FE6D80 /* GoogleSettingViewController.swift in Sources */,
 				BF822AB521E86ACF00854185 /* TaskFormController.swift in Sources */,
+				BF18BD4D2217C12400192EB9 /* TaskRepository.swift in Sources */,
+				BF18BD5122184F4300192EB9 /* CategoryRepository.swift in Sources */,
 				BF70F35821E92E0600AF6455 /* UIColorHex.swift in Sources */,
 				BFBDA78B2209902A00ACDE57 /* TaskNotification.swift in Sources */,
 				BF822AA021E85E2400854185 /* ViewController.swift in Sources */,
 				BF822A9E21E85E2400854185 /* AppDelegate.swift in Sources */,
 				BF41EEEA21FAF04200CC7AED /* Category.swift in Sources */,
 				BFEA1458220D74DD00FE6D80 /* SettingsViewController.swift in Sources */,
+				BF18BD4F22184CA300192EB9 /* Realm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

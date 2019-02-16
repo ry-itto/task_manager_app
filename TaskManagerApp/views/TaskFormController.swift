@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class TaskFormController: UIViewController {
     
@@ -19,10 +18,9 @@ class TaskFormController: UIViewController {
     @IBOutlet var taskCategory: UITextField?
     @IBOutlet var taskCategoryAddButton: UIButton?
     
-    let task: Task
     let buttonTitle: String
+    let task: Task
     let taskCategories = ["勉強", "課題", "その他"]
-    let realm: Realm
     
     var dueDate: Date = Date()
     var taskCompleted: Bool = false
@@ -30,16 +28,6 @@ class TaskFormController: UIViewController {
     init(task: Task, buttonTitle: String) {
         self.task = task
         self.buttonTitle = buttonTitle
-        let config = Realm.Configuration(schemaVersion: 4)
-        Realm.Configuration.defaultConfiguration = config
-        // Realm初期化，Realmファイルへのパスを標準出力
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-        do {
-            realm = try Realm()
-        } catch {
-            fatalError("Failed : Realm initialize")
-        }
-        
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -63,32 +51,13 @@ class TaskFormController: UIViewController {
     // 登録，編集ボタンがタップされた時の処理
     @IBAction func didSubmitButtonTapped(_ sender: UIButton) {
         sender.backgroundColor = UIColor(hex: "00adb5")
-        let numberOfTasks: Int? = realm.objects(Task.self).count
-        if task.id == 0 {
-            task.id = (numberOfTasks ?? 0) + 1
-        }
-        
-        do {
-            try realm.write {
-                task.title = taskTitle?.text ?? ""
-                task.category = taskCategory?.text ?? ""
-                task.content = taskContent?.text ?? ""
-                task.dueDate = dueDate
-                task.checked = taskCompleted
-                if realm.object(ofType: Task.self, forPrimaryKey: task.id) == nil {
-                    realm.add(task)
-                }
-                // ローカル通知を登録
-                TaskNotification.setNotification(task)
-                
-                if GoogleAPIClient.sharedInstance.isRegisterToCalendar {
-                    // Google Calendarにタスクに基づくイベント登録
-                    GoogleAPIClient.sharedInstance.addEventToGoogleCalendar(summary: task.title, description: task.content, targetDate: task.dueDate)
-                }
-            }
-        } catch {
-            print("RegisterViewController#didRegisterButtonTapped")
-            print("Failed : Realm write process")
+
+        if let task = TaskRepository.sharedInstance.findTask(primaryKey: task.id){
+            TaskRepository.sharedInstance.updateTask(task: task, title: taskTitle?.text, category: taskCategory?.text,
+                                                     content: taskContent?.text, dueDate: dueDate, checked: taskCompleted)
+        } else {
+            TaskRepository.sharedInstance.createTask(title: taskTitle?.text, category: taskCategory?.text,
+                                                     content: taskContent?.text, dueDate: dueDate, checked: taskCompleted)
         }
         (presentingViewController as? ViewController)?.tableView?.reloadData()
         navigationController?.popViewController(animated: true)
@@ -209,19 +178,7 @@ class TaskFormController: UIViewController {
         let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
         let registerAction = UIAlertAction(title: "登録", style: .default, handler: { (action) in
             if let categoryName = alertController.textFields?.first?.text {
-                let category: Category = Category()
-                let nextCategoryId = self.realm.objects(Category.self).count + 1
-                
-                category.id = nextCategoryId
-                category.name = categoryName
-                
-                do {
-                    try self.realm.write {
-                        self.realm.add(category)
-                    }
-                } catch {
-                    return
-                }
+                CategoryRepository.sharedInstance.createCategory(name: categoryName)
             }
         })
         

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class ViewController: UIViewController {
 
@@ -15,24 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet var registerButton: UIButton?
     
     let CELL_IDENTIFIER = "cell"
-    let realm: Realm
+    let taskReposiory: TaskRepository = TaskRepository.sharedInstance
     var tasks: Array<Task> = []
-    
-    init() {
-        let config = Realm.Configuration(schemaVersion: 4)
-        Realm.Configuration.defaultConfiguration = config
-        // Realm初期化
-        do {
-            try realm = Realm()
-        } catch {
-            fatalError("Failed : Realm initialize")
-        }
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     static func createWithTabBarItem() -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: ViewController())
@@ -55,10 +38,7 @@ class ViewController: UIViewController {
         registerButton?.layer.shadowRadius = 5
         registerButton?.layer.shadowOpacity = 1.0
         
-        // デリゲートを設定
         table.delegate = self
-        
-        // データソースを設定
         table.dataSource = self
         table.tableFooterView = UIView()
         
@@ -67,8 +47,7 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let t = realm.objects(Task.self)
-        tasks = Array(t)
+        tasks = taskReposiory.findAllTask()
         tableView?.reloadData()
     }
     
@@ -120,21 +99,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     // テーブルが編集モードになった時の処理
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            do {
-                try realm.write {
-                    // テーブルの削除などをする時に以下のメソッドが必要
-                    tableView.beginUpdates()
-                    realm.delete((tasks[indexPath.row]))
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                }
-            } catch {
-                print("Failed : delete record")
-            }
+            // テーブルの削除などをする時に以下のメソッドが必要
+            tableView.beginUpdates()
+            taskReposiory.deleteTask(task: tasks[indexPath.row])
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            // テーブルを更新した時にnumberOfRowsInSectionから返る値も変える必要があるため，tasksを更新
+            tasks = TaskRepository.sharedInstance.findAllTask()
+            tableView.endUpdates()
         }
-        // テーブルを更新した時にnumberOfRowsInSectionから返る値も変える必要があるため，tasksを更新
-        let t = realm.objects(Task.self)
-        tasks = Array(t)
-        tableView.endUpdates()
     }
     
     // セルがタップされた時に呼ばれるメソッド
