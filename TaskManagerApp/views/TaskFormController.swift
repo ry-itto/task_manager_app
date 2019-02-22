@@ -8,15 +8,22 @@
 
 import UIKit
 
+protocol TaskFormControllerDelegate: AnyObject {
+    func taskFormControllerDidTapCancel(_ taskFormController: TaskFormController)
+}
+
 class TaskFormController: UIViewController {
     
     @IBOutlet var dueDateTextField: UITextField?
     @IBOutlet var taskTitle: UITextField?
     @IBOutlet var taskContent: UITextField?
     @IBOutlet var registerButton: UIButton?
+    @IBOutlet var cancelButton: UIButton?
     @IBOutlet var checkButton: UIButton?
     @IBOutlet var taskCategory: UITextField?
     @IBOutlet var taskCategoryAddButton: UIButton?
+    
+    weak var delegate: TaskFormControllerDelegate?
     
     let buttonTitle: String
     let task: Task
@@ -41,10 +48,7 @@ class TaskFormController: UIViewController {
         
         checkButton?.setImage(UIImage(named: "blank_checkbox"), for: .normal)
         
-        // 各フィールドの初期化
         initializeFields()
-        
-        // 登録，編集ボタンのUI設定
         initializeButton()
     }
     
@@ -59,20 +63,12 @@ class TaskFormController: UIViewController {
             TaskRepository.sharedInstance.createTask(title: taskTitle?.text, category: taskCategory?.text,
                                                      content: taskContent?.text, dueDate: dueDate, checked: taskCompleted)
         }
+        
         (presentingViewController as? ViewController)?.tableView?.reloadData()
-        navigationController?.popViewController(animated: true)
+        delegate?.taskFormControllerDidTapCancel(self)
     }
     
-    // ボタンを押している間のイベント
-    @IBAction func submitButtonIsTapping(_ sender: UIButton) {
-        sender.backgroundColor = UIColor(hex: "009da4")
-    }
-    
-    // ボタンがタップされ，ボタンの外側で放された(キャンセルされた)時のイベント
-    @IBAction func didSubmitButtonTappedOutside(_ sender: UIButton) {
-        sender.backgroundColor = UIColor(hex: "00adb5")
-    }
-    
+    // カテゴリー追加ボタンが押された時の処理
     @IBAction func categoryAddButtonDidTapped(_ sender: UIButton) {
         let alertView = createTextInputAlert()
         self.present(alertView, animated: true, completion: nil)
@@ -82,6 +78,10 @@ class TaskFormController: UIViewController {
     @IBAction func checkButtonDidTapped(_ sender: UIButton) {
         checkButton?.isSelected = false
         changeCheckBoxState()
+    }
+    
+    @IBAction func cancelButtonDidTapped(_ sender: UIButton) {
+        delegate?.taskFormControllerDidTapCancel(self)
     }
     
     // 画面をリロードするメソッド
@@ -151,8 +151,6 @@ class TaskFormController: UIViewController {
     
     // Buttonの設定
     private func initializeButton() {
-        registerButton?.backgroundColor = UIColor(hex: "00adb5")
-        registerButton?.setTitleColor(UIColor(hex: "222831"), for: .normal)
         registerButton?.setTitle(buttonTitle, for: .normal)
     }
     

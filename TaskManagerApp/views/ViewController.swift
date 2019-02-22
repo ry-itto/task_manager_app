@@ -18,9 +18,9 @@ class ViewController: UIViewController {
     var tasks: Array<Task> = []
     
     static func createWithTabBarItem() -> UINavigationController {
-        let navigationController = UINavigationController(rootViewController: ViewController())
-        navigationController.tabBarItem = UITabBarItem(title: "タスク管理", image: UIImage(named: "todoList"), tag: 0)
-        return navigationController
+        let viewController = UINavigationController(rootViewController: ViewController())
+        viewController.tabBarItem = UITabBarItem(title: "タスク管理", image: UIImage(named: "todoList"), tag: 0)
+        return viewController
     }
     
     override func viewDidLoad() {
@@ -56,7 +56,8 @@ class ViewController: UIViewController {
         sender.backgroundColor = UIColor(hex: "00adb5")
         let registerView: TaskFormController = TaskFormController(task: Task(), buttonTitle: "登録")
         registerView.title = "タスク登録"
-        navigationController?.pushViewController(registerView, animated: true)
+        registerView.delegate = self
+        present(registerView, animated: true, completion: nil)
     }
     
     // ボタンを押している間のイベント
@@ -121,7 +122,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         // 登録，編集画面を初期化
         let registerView: TaskFormController = TaskFormController(task: tasks[indexPath.row], buttonTitle: "更新")
         registerView.title = "タスク編集"
-        
-        navigationController?.pushViewController(registerView, animated: true)
+
+        registerView.delegate = self
+        present(registerView, animated: true, completion: nil)
+    }
+}
+
+extension ViewController: TaskFormControllerDelegate {
+    func taskFormControllerDidTapCancel(_ taskFormController: TaskFormController) {
+        taskFormController.dismiss(animated: true, completion: nil)
     }
 }
