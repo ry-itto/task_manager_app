@@ -8,12 +8,13 @@
 
 import UIKit
 
+// MARK: ライフサイクル系のメソッド定義, 変数定義
 class ViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView?
     @IBOutlet var registerButton: UIButton?
     
-    let CELL_IDENTIFIER = "cell"
+    let cellIdentifier = "cell"
     let taskReposiory: TaskRepository = TaskRepository.sharedInstance
     var tasks: Array<Task> = []
     
@@ -43,13 +44,17 @@ class ViewController: UIViewController {
         table.tableFooterView = UIView()
         
         // セルを登録する
-        table.register(UITableViewCell.self, forCellReuseIdentifier: CELL_IDENTIFIER)
+        table.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         tasks = taskReposiory.findAllTask()
         tableView?.reloadData()
     }
+}
+
+// MARK: アクション系メソッド定義
+extension ViewController {
     
     // 「追加」ボタンがタップされた時の処理
     @IBAction func didAddButtonTapped(_ sender: UIButton) {
@@ -71,6 +76,7 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: テーブルビュー用デリゲート実装
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     // セクションごとに何個のセルを表示するか決めるメソッド
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,7 +90,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     // 各セルに対しての設定をするメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableCell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER, for: indexPath)
+        let tableCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
         tableCell.textLabel?.text = tasks[indexPath.row].title
         
@@ -128,6 +134,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: 開くモーダル 用デリゲートの定義
 extension ViewController: TaskFormControllerDelegate {
     func taskFormControllerDidTapCancel(_ taskFormController: TaskFormController) {
         taskFormController.dismiss(animated: true, completion: nil)

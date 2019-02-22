@@ -62,7 +62,6 @@ class TaskNotification {
                                                                 repeats: false)
         
         return trigger
-
     }
 }
 

@@ -8,10 +8,12 @@
 
 import UIKit
 
+// MARK: モーダルを閉じる用のデリゲート
 protocol TaskFormControllerDelegate: AnyObject {
     func taskFormControllerDidTapCancel(_ taskFormController: TaskFormController)
 }
 
+// MARK: ライフサイクル系メソッド, 定数,変数定義
 class TaskFormController: UIViewController {
     
     @IBOutlet var dueDateTextField: UITextField?
@@ -51,6 +53,10 @@ class TaskFormController: UIViewController {
         initializeFields()
         initializeButton()
     }
+}
+
+// MARK: アクション系メソッド定義
+extension TaskFormController {
     
     // 登録，編集ボタンがタップされた時の処理
     @IBAction func didSubmitButtonTapped(_ sender: UIButton) {
@@ -84,38 +90,28 @@ class TaskFormController: UIViewController {
         delegate?.taskFormControllerDidTapCancel(self)
     }
     
-    // 画面をリロードするメソッド
-    func reloadView() {
-        loadView()
-        viewDidLoad()
+    // ツールバーにあるdoneボタンがタップされた時の処理
+    @objc private func didDoneButtonTapped(_ sender: UIBarButtonItem) {
+        // キーボードを隠す
+        taskTitle?.resignFirstResponder()
+        taskContent?.resignFirstResponder()
+        taskCategory?.resignFirstResponder()
+        dueDateTextField?.resignFirstResponder()
     }
     
-    // DatePickerのViewを作成するメソッド
-    private func createDatePickerView() -> UIDatePicker {
-        let dp: UIDatePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 320, height: 200))
-        dp.locale = Locale.current
-        dp.datePickerMode = .date
-        dp.minimumDate = Date()
-        dp.addTarget(self, action: #selector(setText), for: .valueChanged)
-        return dp
-    }
-    
-    // タスクのカテゴリー用PickerViewを作成するメソッド
-    private func createTaskCategoryPickerView() -> UIPickerView {
-        let picker = UIPickerView(frame: CGRect(x: 0, y: 0, width: 320, height: 200))
-        picker.delegate = self
-        picker.dataSource = self
-        return picker
-    }
-    
-    // ツールバーについて設定するメソッド
-    private func createToolBar() -> UIToolbar {
-        let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-        let doneButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didDoneButtonTapped))
-        toolbar.setItems([doneButtonItem], animated: true)
+    // 期日テキストフィールドに整形したDateを設定
+    @objc private func setText(_ sender: UIDatePicker) {
+        let df = DateFormatter()
+        df.dateStyle = .long
+        df.locale = Locale(identifier: "ja")
+        dueDateTextField?.text = df.string(from: sender.date)
         
-        return toolbar
+        dueDate = sender.date
     }
+}
+
+// MARK: UI
+extension TaskFormController {
     
     // 送られてきたTaskの値をテキストフィールドに適用します。
     private func initializeFields() {
@@ -154,6 +150,33 @@ class TaskFormController: UIViewController {
         registerButton?.setTitle(buttonTitle, for: .normal)
     }
     
+    // DatePickerのViewを作成するメソッド
+    private func createDatePickerView() -> UIDatePicker {
+        let dp: UIDatePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 320, height: 200))
+        dp.locale = Locale.current
+        dp.datePickerMode = .date
+        dp.minimumDate = Date()
+        dp.addTarget(self, action: #selector(setText), for: .valueChanged)
+        return dp
+    }
+    
+    // タスクのカテゴリー用PickerViewを作成するメソッド
+    private func createTaskCategoryPickerView() -> UIPickerView {
+        let picker = UIPickerView(frame: CGRect(x: 0, y: 0, width: 320, height: 200))
+        picker.delegate = self
+        picker.dataSource = self
+        return picker
+    }
+    
+    // ツールバーについて設定するメソッド
+    private func createToolBar() -> UIToolbar {
+        let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+        let doneButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didDoneButtonTapped))
+        toolbar.setItems([doneButtonItem], animated: true)
+        
+        return toolbar
+    }
+    
     // チェックボックスの状態を変える処理
     private func changeCheckBoxState() {
         if taskCompleted {
@@ -185,28 +208,9 @@ class TaskFormController: UIViewController {
         
         return alertController
     }
-    
-    // ツールバーにあるdoneボタンがタップされた時の処理
-    @objc private func didDoneButtonTapped(_ sender: UIBarButtonItem) {
-        // キーボードを隠す
-        taskTitle?.resignFirstResponder()
-        taskContent?.resignFirstResponder()
-        taskCategory?.resignFirstResponder()
-        dueDateTextField?.resignFirstResponder()
-    }
-    
-    // 期日テキストフィールドに整形したDateを設定
-    @objc private func setText(_ sender: UIDatePicker) {
-        let df = DateFormatter()
-        df.dateStyle = .long
-        df.locale = Locale(identifier: "ja")
-        dueDateTextField?.text = df.string(from: sender.date)
-        
-        dueDate = sender.date
-    }
 }
 
-
+// MARK: 以下ピッカー系のメソッド定義
 extension TaskFormController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
