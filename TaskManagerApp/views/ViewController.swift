@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-// MARK: ライフサイクル系のメソッド定義, 変数定義
+/// -MARK: ライフサイクル系のメソッド定義, 変数定義
 class ViewController: UIViewController {
+    
+    private let disposeBag = DisposeBag()
 
-    @IBOutlet var tableView: UITableView?
-    @IBOutlet var registerButton: UIButton?
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var registerButton: UIButton!
     
     let cellIdentifier = "cell"
     let taskReposiory: TaskRepository = TaskRepository.sharedInstance
@@ -45,34 +49,34 @@ class ViewController: UIViewController {
         
         // セルを登録する
         table.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         tasks = taskReposiory.findAllTask()
         tableView?.reloadData()
     }
-}
-
-// MARK: アクション系メソッド定義
-extension ViewController {
     
-    // 「追加」ボタンがタップされた時の処理
-    @IBAction func didAddButtonTapped(_ sender: UIButton) {
-        sender.backgroundColor = UIColor(hex: "00adb5")
-        let registerView: TaskFormController = TaskFormController(task: Task(), buttonTitle: "登録")
-        registerView.title = "タスク登録"
-        registerView.delegate = self
-        present(registerView, animated: true, completion: nil)
-    }
-    
-    // ボタンを押している間のイベント
-    @IBAction func addButtonIsTapping(_ sender: UIButton) {
-        sender.backgroundColor = UIColor(hex: "009da4")
-    }
-    
-    // ボタンがタップされ，ボタンの外側で放された(キャンセルされた)時のイベント
-    @IBAction func didAddButtonTappedOutside(_ sender: UIButton) {
-        sender.backgroundColor = UIColor(hex: "00adb5")
+    private func bind() {
+        registerButton.rx.tap.asObservable()
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let registerView = TaskFormController(task: Task(), buttonTitle: "登録")
+                registerView.title = "タスク登録"
+                registerView.delegate = self
+                self.present(registerView, animated: true, completion: nil)
+            }).disposed(by: disposeBag)
+        
+        registerButton.rx.controlEvent([.touchDown]).asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.registerButton.backgroundColor = UIColor(hex: "009da4")
+            }).disposed(by: disposeBag)
+        
+        registerButton.rx.controlEvent([.touchUpOutside, .touchUpInside]).asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.registerButton.backgroundColor = UIColor(hex: "00adb5")
+            }).disposed(by: disposeBag)
     }
 }
 

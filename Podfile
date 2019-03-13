@@ -6,6 +6,8 @@ target 'TaskManagerApp' do
   use_frameworks!
 
   # Pods for TaskManagerApp
+  pod 'RxSwift'
+  pod 'RxCocoa'
   pod 'RealmSwift'
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
