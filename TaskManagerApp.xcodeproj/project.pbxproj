@@ -28,6 +28,8 @@
 		BFEA145E220DF4CA00FE6D80 /* GoogleSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEA145C220DF4CA00FE6D80 /* GoogleSettingViewController.swift */; };
 		BFEA145F220DF4CA00FE6D80 /* GoogleSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFEA145D220DF4CA00FE6D80 /* GoogleSettingViewController.xib */; };
 		BFEA1461220F45AB00FE6D80 /* GoogleAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEA1460220F45AB00FE6D80 /* GoogleAPIClient.swift */; };
+		BFFD7C082239395C00AB761D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD7C072239395C00AB761D /* ViewModel.swift */; };
+		BFFD7C0A22393CC200AB761D /* TaskFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFD7C0922393CC200AB761D /* TaskFormViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		BFEA145C220DF4CA00FE6D80 /* GoogleSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSettingViewController.swift; sourceTree = "<group>"; };
 		BFEA145D220DF4CA00FE6D80 /* GoogleSettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleSettingViewController.xib; sourceTree = "<group>"; };
 		BFEA1460220F45AB00FE6D80 /* GoogleAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAPIClient.swift; sourceTree = "<group>"; };
+		BFFD7C072239395C00AB761D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		BFFD7C0922393CC200AB761D /* TaskFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFormViewModel.swift; sourceTree = "<group>"; };
 		C0132FEC54C2ABFA53C41E2A /* Pods_TaskManagerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskManagerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F685130167D1CE40D93B95EC /* Pods-TaskManagerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskManagerApp.release.xcconfig"; path = "Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp.release.xcconfig"; sourceTree = "<group>"; };
 		F84283D78672248548C15E26 /* Pods-TaskManagerApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskManagerApp.debug.xcconfig"; path = "Target Support Files/Pods-TaskManagerApp/Pods-TaskManagerApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -79,13 +83,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		BF18BD492217BE7F00192EB9 /* model */ = {
+		BF18BD492217BE7F00192EB9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				BF18BD4C2217C12400192EB9 /* TaskRepository.swift */,
 				BF18BD5022184F4300192EB9 /* CategoryRepository.swift */,
 			);
-			path = model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		BF822A9121E85E2400854185 = {
@@ -113,16 +117,17 @@
 				BF822AA921E85E2700854185 /* Info.plist */,
 				BF822A9D21E85E2400854185 /* AppDelegate.swift */,
 				BF822AA421E85E2700854185 /* Assets.xcassets */,
-				BFEA140E220C078300FE6D80 /* db */,
+				BFEA140E220C078300FE6D80 /* DB */,
 				BF822AA621E85E2700854185 /* LaunchScreen.storyboard */,
-				BF18BD492217BE7F00192EB9 /* model */,
-				BFEA140F220C079900FE6D80 /* util */,
-				BFEA140D220C075500FE6D80 /* views */,
+				BF18BD492217BE7F00192EB9 /* Model */,
+				BFEA140F220C079900FE6D80 /* Util */,
+				BFEA140D220C075500FE6D80 /* Views */,
+				BFFD7C062239390B00AB761D /* ViewModel */,
 			);
 			path = TaskManagerApp;
 			sourceTree = "<group>";
 		};
-		BFEA140D220C075500FE6D80 /* views */ = {
+		BFEA140D220C075500FE6D80 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				BFEA145C220DF4CA00FE6D80 /* GoogleSettingViewController.swift */,
@@ -134,19 +139,19 @@
 				BF822A9F21E85E2400854185 /* ViewController.swift */,
 				BF822AB121E8633F00854185 /* ViewController.xib */,
 			);
-			path = views;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		BFEA140E220C078300FE6D80 /* db */ = {
+		BFEA140E220C078300FE6D80 /* DB */ = {
 			isa = PBXGroup;
 			children = (
 				BF41EEE921FAF04200CC7AED /* Category.swift */,
 				BF70F35521E88D8700AF6455 /* Task.swift */,
 			);
-			path = db;
+			path = DB;
 			sourceTree = "<group>";
 		};
-		BFEA140F220C079900FE6D80 /* util */ = {
+		BFEA140F220C079900FE6D80 /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				BFEA1460220F45AB00FE6D80 /* GoogleAPIClient.swift */,
@@ -154,7 +159,16 @@
 				BF70F35721E92E0500AF6455 /* UIColorHex.swift */,
 				BF18BD4E22184CA300192EB9 /* Realm.swift */,
 			);
-			path = util;
+			path = Util;
+			sourceTree = "<group>";
+		};
+		BFFD7C062239390B00AB761D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BFFD7C072239395C00AB761D /* ViewModel.swift */,
+				BFFD7C0922393CC200AB761D /* TaskFormViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		DC5501F961C08E0FF33B587D /* Frameworks */ = {
@@ -332,6 +346,8 @@
 				BF822AB521E86ACF00854185 /* TaskFormController.swift in Sources */,
 				BF18BD4D2217C12400192EB9 /* TaskRepository.swift in Sources */,
 				BF18BD5122184F4300192EB9 /* CategoryRepository.swift in Sources */,
+				BFFD7C082239395C00AB761D /* ViewModel.swift in Sources */,
+				BFFD7C0A22393CC200AB761D /* TaskFormViewModel.swift in Sources */,
 				BF70F35821E92E0600AF6455 /* UIColorHex.swift in Sources */,
 				BFBDA78B2209902A00ACDE57 /* TaskNotification.swift in Sources */,
 				BF822AA021E85E2400854185 /* ViewController.swift in Sources */,

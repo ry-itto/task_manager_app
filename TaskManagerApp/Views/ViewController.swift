@@ -124,11 +124,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        // 日付を文字列にするためのフォーマット作成
-        let df = DateFormatter()
-        df.dateStyle = .long
-        df.locale = Locale(identifier: "ja")
-        
         // 登録，編集画面を初期化
         let registerView: TaskFormController = TaskFormController(task: tasks[indexPath.row], buttonTitle: "更新")
         registerView.title = "タスク編集"

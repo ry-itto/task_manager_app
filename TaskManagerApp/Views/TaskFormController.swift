@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 // MARK: モーダルを閉じる用のデリゲート
 protocol TaskFormControllerDelegate: AnyObject {
@@ -15,6 +17,9 @@ protocol TaskFormControllerDelegate: AnyObject {
 
 // MARK: ライフサイクル系メソッド, 定数,変数定義
 class TaskFormController: UIViewController {
+    
+    private let disposeBag = DisposeBag()
+    private let viewModel = TaskFormViewModel()
     
     @IBOutlet var dueDateTextField: UITextField?
     @IBOutlet var taskTitle: UITextField?
@@ -30,6 +35,7 @@ class TaskFormController: UIViewController {
     let buttonTitle: String
     let task: Task
     let taskCategories = ["勉強", "課題", "その他"]
+    var taskParameters = TaskParameters()
     
     var dueDate: Date = Date()
     var taskCompleted: Bool = false
@@ -37,6 +43,7 @@ class TaskFormController: UIViewController {
     init(task: Task, buttonTitle: String) {
         self.task = task
         self.buttonTitle = buttonTitle
+        self.taskParameters.id = task.id
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -52,27 +59,52 @@ class TaskFormController: UIViewController {
         
         initializeFields()
         initializeButton()
+        bind()
+    }
+    
+    private func bind() {
+        // 入力フォームの内容をバインド
+        taskTitle?.rx.text.orEmpty.asObservable()
+            .subscribe(onNext: { [weak self] title in
+                guard let self = self else { return }
+                self.taskParameters.title = title
+            }).disposed(by: disposeBag)
+        
+        taskContent?.rx.text.orEmpty.asObservable()
+            .subscribe(onNext: { [weak self] content in
+                guard let self = self else { return }
+                self.taskParameters.content = content
+            }).disposed(by: disposeBag)
+        
+        dueDateTextField?.rx.text.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.taskParameters.dueDate = self.dueDate
+            }).disposed(by: disposeBag)
+        
+        taskCategory?.rx.text.orEmpty.asObservable()
+            .subscribe(onNext: { [weak self] (category) in
+                guard let self = self else { return }
+                self.taskParameters.category = category
+            }).disposed(by: disposeBag)
+        
+        registerButton?.rx.tap.asObservable()
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.viewModel.createOrUpdateTask.onNext(self.taskParameters)
+                (self.presentingViewController as? ViewController)?.tableView?.reloadData()
+                self.delegate?.taskFormControllerDidTapCancel(self)
+            }).disposed(by: disposeBag)
+        
+        registerButton?.rx.controlEvent([.touchUpInside]).asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.registerButton?.backgroundColor = UIColor(hex: "00adb5")
+            }).disposed(by: disposeBag)
     }
 }
 
 // MARK: アクション系メソッド定義
 extension TaskFormController {
-    
-    // 登録，編集ボタンがタップされた時の処理
-    @IBAction func didSubmitButtonTapped(_ sender: UIButton) {
-        sender.backgroundColor = UIColor(hex: "00adb5")
-
-        if let task = TaskRepository.sharedInstance.findTask(primaryKey: task.id){
-            TaskRepository.sharedInstance.updateTask(task: task, title: taskTitle?.text, category: taskCategory?.text,
-                                                     content: taskContent?.text, dueDate: dueDate, checked: taskCompleted)
-        } else {
-            TaskRepository.sharedInstance.createTask(title: taskTitle?.text, category: taskCategory?.text,
-                                                     content: taskContent?.text, dueDate: dueDate, checked: taskCompleted)
-        }
-        
-        (presentingViewController as? ViewController)?.tableView?.reloadData()
-        delegate?.taskFormControllerDidTapCancel(self)
-    }
     
     // カテゴリー追加ボタンが押された時の処理
     @IBAction func categoryAddButtonDidTapped(_ sender: UIButton) {
